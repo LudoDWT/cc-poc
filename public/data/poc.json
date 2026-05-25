@@ -1,0 +1,518 @@
+{
+  "_exemple": true,
+  "_note": "DONNÉES DE DÉMO (fictives) : structure et calendrier réels du POC SIX, mais indicateurs, REX 1, cas d'usage et avant/après sont des exemples illustratifs pour la démonstration. À remplacer par les vraies mesures au fil de l'eau. Éditez ce fichier puis rafraîchissez (aucun rebuild en dev). Contrat documenté dans src/types/poc.ts.",
+  "meta": {
+    "nom": "POC Claude & Claude Code",
+    "sousTitre": "Équipe SIX · Système d'Information & Expérience digitale",
+    "dateConfig": "2026-06-01",
+    "dateM0": "2026-06-15",
+    "dateRex1": "2026-08-15",
+    "dateRex2": "2026-10-15",
+    "dateRex3": "2026-12-15",
+    "dateBilan": "2027-01-15",
+    "statut": "À venir · setup en amont à partir du 1er juin 2026",
+    "meteo": "vert",
+    "objectifs": [
+      "Automatiser les tâches répétitives : specs, user stories, tests, revue de code, comptes-rendus.",
+      "Gagner en productivité sur une équipe restreinte (9 personnes) et pluridisciplinaire.",
+      "Homogénéiser les pratiques entre métiers : documentation, qualité, manière de spécifier.",
+      "Capitaliser un catalogue de cas d'usage réplicables pour décider du passage à l'échelle (Go / No-go)."
+    ],
+    "prochaineEcheance": { "label": "Début du setup", "date": "2026-06-01" }
+  },
+  "kpisGlobaux": [
+    {
+      "id": "taux-adoption",
+      "label": "Taux d'adoption",
+      "valeur": 68,
+      "unite": "%",
+      "cible": 90,
+      "tendance": "hausse",
+      "variation": 14,
+      "historique": [
+        { "date": "2026-06-22", "valeur": 18 },
+        { "date": "2026-07-15", "valeur": 34 },
+        { "date": "2026-08-15", "valeur": 47 },
+        { "date": "2026-09-15", "valeur": 58 },
+        { "date": "2026-10-15", "valeur": 68 }
+      ]
+    },
+    {
+      "id": "heures-gagnees",
+      "label": "Heures gagnées (cumul)",
+      "valeur": 560,
+      "unite": " h",
+      "tendance": "hausse",
+      "variation": 22,
+      "aide": "Cumul estimé depuis le début.",
+      "historique": [
+        { "date": "2026-06-22", "valeur": 40 },
+        { "date": "2026-07-15", "valeur": 150 },
+        { "date": "2026-08-15", "valeur": 290 },
+        { "date": "2026-09-15", "valeur": 430 },
+        { "date": "2026-10-15", "valeur": 560 }
+      ]
+    },
+    {
+      "id": "taches-assistees",
+      "label": "Tâches assistées",
+      "valeur": 412,
+      "unite": "",
+      "tendance": "hausse",
+      "variation": 9,
+      "aide": "Tâches réalisées avec l'aide de l'IA.",
+      "historique": [
+        { "date": "2026-06-22", "valeur": 22 },
+        { "date": "2026-07-15", "valeur": 60 },
+        { "date": "2026-08-15", "valeur": 110 },
+        { "date": "2026-09-15", "valeur": 240 },
+        { "date": "2026-10-15", "valeur": 412 }
+      ]
+    },
+    {
+      "id": "satisfaction",
+      "label": "Satisfaction",
+      "valeur": 8.3,
+      "unite": "/10",
+      "decimales": 1,
+      "cible": 8,
+      "tendance": "hausse",
+      "variation": 6,
+      "historique": [
+        { "date": "2026-06-22", "valeur": 6.8 },
+        { "date": "2026-07-15", "valeur": 7.3 },
+        { "date": "2026-08-15", "valeur": 7.7 },
+        { "date": "2026-09-15", "valeur": 8.0 },
+        { "date": "2026-10-15", "valeur": 8.3 }
+      ]
+    },
+    {
+      "id": "frequence-usage",
+      "label": "Fréquence d'usage",
+      "valeur": 18.6,
+      "unite": " /sem.",
+      "decimales": 1,
+      "tendance": "stable",
+      "variation": 2,
+      "aide": "Interactions IA par utilisateur, en moyenne par semaine.",
+      "historique": [
+        { "date": "2026-06-22", "valeur": 4.2 },
+        { "date": "2026-07-15", "valeur": 9.5 },
+        { "date": "2026-08-15", "valeur": 14.0 },
+        { "date": "2026-09-15", "valeur": 17.2 },
+        { "date": "2026-10-15", "valeur": 18.6 }
+      ]
+    },
+    {
+      "id": "cas-usage-deployes",
+      "label": "Cas d'usage déployés",
+      "valeur": 9,
+      "unite": "",
+      "tendance": "hausse",
+      "variation": 50,
+      "aide": "Adoptés ou industrialisés.",
+      "historique": [
+        { "date": "2026-06-22", "valeur": 0 },
+        { "date": "2026-07-15", "valeur": 1 },
+        { "date": "2026-08-15", "valeur": 3 },
+        { "date": "2026-09-15", "valeur": 6 },
+        { "date": "2026-10-15", "valeur": 9 }
+      ]
+    },
+    {
+      "id": "nps",
+      "label": "NPS",
+      "valeur": 42,
+      "unite": "",
+      "tendance": "hausse",
+      "variation": 8,
+      "aide": "Net Promoter Score — recommandation de l'outil par l'équipe.",
+      "historique": [
+        { "date": "2026-06-22", "valeur": 5 },
+        { "date": "2026-07-15", "valeur": 18 },
+        { "date": "2026-08-15", "valeur": 27 },
+        { "date": "2026-09-15", "valeur": 36 },
+        { "date": "2026-10-15", "valeur": 42 }
+      ]
+    },
+    {
+      "id": "roi",
+      "label": "ROI estimé",
+      "valeur": 3.4,
+      "unite": "×",
+      "decimales": 1,
+      "cible": 4,
+      "tendance": "hausse",
+      "variation": 12,
+      "aide": "Gains valorisés rapportés aux coûts."
+    }
+  ],
+  "metiers": [
+    {
+      "slug": "po",
+      "nom": "Product Owner",
+      "effectif": 4,
+      "responsable": "Camille Roy",
+      "pitch": "Rédaction et découpage du backlog, synthèse de feedback utilisateur.",
+      "kpis": [
+        { "id": "po-temps", "label": "Temps gagné / semaine", "valeur": 5.5, "unite": " h", "decimales": 1, "tendance": "hausse", "variation": 10 }
+      ],
+      "casUsageIds": ["cas-po-user-stories"],
+      "avantApresIds": ["ap-po-specs"],
+      "verbatims": [
+        { "auteur": "Camille Roy", "metier": "Product Owner", "citation": "Le découpage d'epics qui me prenait une matinée est devenu un dialogue de vingt minutes — et le résultat est plus régulier." }
+      ]
+    },
+    {
+      "slug": "pm",
+      "nom": "Project Manager",
+      "effectif": 3,
+      "responsable": "Thomas Mercier",
+      "pitch": "Comptes-rendus, reporting, communication et planification.",
+      "kpis": [
+        { "id": "pm-temps", "label": "Temps gagné / semaine", "valeur": 4.0, "unite": " h", "decimales": 1, "tendance": "hausse", "variation": 8 }
+      ],
+      "casUsageIds": ["cas-pm-comptes-rendus"],
+      "avantApresIds": ["ap-pm-reporting"],
+      "verbatims": [
+        { "auteur": "Thomas Mercier", "metier": "Project Manager", "citation": "Je ne repousse plus jamais un compte-rendu : il est quasiment prêt avant la fin de la réunion." }
+      ]
+    },
+    {
+      "slug": "qa",
+      "nom": "QA",
+      "effectif": 5,
+      "responsable": "Awa Diallo",
+      "pitch": "Cas de test, jeux de données, automatisation, analyse de logs.",
+      "kpis": [
+        { "id": "qa-temps", "label": "Temps gagné / semaine", "valeur": 7.2, "unite": " h", "decimales": 1, "tendance": "hausse", "variation": 18 }
+      ],
+      "casUsageIds": ["cas-qa-jeux-donnees"],
+      "avantApresIds": ["ap-qa-cas-test"],
+      "verbatims": [
+        { "auteur": "Awa Diallo", "metier": "QA", "citation": "Les jeux de données générés couvrent des cas limites auxquels je n'aurais pas pensé un vendredi à 17 h." }
+      ]
+    },
+    {
+      "slug": "dev",
+      "nom": "Développement",
+      "effectif": 14,
+      "responsable": "Julien Faure",
+      "pitch": "Génération et refactoring de code, tests, revue, documentation, debug.",
+      "kpis": [
+        { "id": "dev-temps", "label": "Temps gagné / semaine", "valeur": 9.5, "unite": " h", "decimales": 1, "tendance": "hausse", "variation": 24 }
+      ],
+      "casUsageIds": ["cas-dev-tests-unitaires"],
+      "avantApresIds": ["ap-dev-revue"],
+      "verbatims": [
+        { "auteur": "Julien Faure", "metier": "Développement", "citation": "Pouvoir générer une suite de tests avant de refactorer du legacy a changé notre rapport au risque." }
+      ]
+    },
+    {
+      "slug": "ops",
+      "nom": "Ops / SRE",
+      "effectif": 6,
+      "responsable": "Sophie Lemoine",
+      "pitch": "Scripts, IaC, runbooks, analyse d'incidents, requêtes monitoring.",
+      "kpis": [
+        { "id": "ops-temps", "label": "Temps gagné / semaine", "valeur": 3.5, "unite": " h", "decimales": 1, "tendance": "hausse", "variation": 6 }
+      ],
+      "casUsageIds": ["cas-ops-runbook"],
+      "avantApresIds": [],
+      "verbatims": [
+        { "auteur": "Sophie Lemoine", "metier": "Ops / SRE", "citation": "Nos procédures d'astreinte ne vivent plus dans la tête de deux personnes." }
+      ]
+    },
+    {
+      "slug": "uiux",
+      "nom": "UI / UX",
+      "effectif": 4,
+      "responsable": "Inès Bonnet",
+      "pitch": "Prototypage, microcopy, recherche utilisateur, accessibilité.",
+      "kpis": [
+        { "id": "uiux-temps", "label": "Temps gagné / semaine", "valeur": 4.5, "unite": " h", "decimales": 1, "tendance": "hausse", "variation": 12 }
+      ],
+      "casUsageIds": [],
+      "avantApresIds": [],
+      "verbatims": []
+    },
+    {
+      "slug": "securite",
+      "nom": "Sécurité",
+      "effectif": 3,
+      "responsable": "Karim Haddad",
+      "pitch": "Revue de code orientée sécurité, analyse de vulnérabilités, sensibilisation.",
+      "kpis": [
+        { "id": "securite-temps", "label": "Temps gagné / semaine", "valeur": 2.5, "unite": " h", "decimales": 1, "tendance": "stable", "variation": 5 }
+      ],
+      "casUsageIds": [],
+      "avantApresIds": [],
+      "verbatims": []
+    },
+    {
+      "slug": "data",
+      "nom": "Data",
+      "effectif": 6,
+      "responsable": "Élodie Marchand",
+      "pitch": "Requêtes SQL, pipelines, analyse exploratoire, documentation de données.",
+      "kpis": [
+        { "id": "data-temps", "label": "Temps gagné / semaine", "valeur": 6.0, "unite": " h", "decimales": 1, "tendance": "hausse", "variation": 15 }
+      ],
+      "casUsageIds": ["cas-data-sql"],
+      "avantApresIds": ["ap-data-doc"],
+      "verbatims": [
+        { "auteur": "Élodie Marchand", "metier": "Data", "citation": "Les métiers obtiennent leurs chiffres plus vite, et je passe mon temps sur l'analyse plutôt que sur la syntaxe SQL." }
+      ]
+    }
+  ],
+  "casUsage": [
+    {
+      "id": "cas-dev-tests-unitaires",
+      "titre": "Génération de tests unitaires sur du legacy",
+      "metier": "dev",
+      "auteur": "Julien Faure",
+      "date": "2026-07-03",
+      "probleme": "Un module de facturation hérité, sans aucun test, qu'on n'osait pas modifier.",
+      "methode": "Claude Code lit le module, propose des cas de test (nominaux + limites) puis génère la suite PHPUnit. Le dev relit et ajuste.",
+      "outil": "Claude Code",
+      "prompt": "Analyse src/Billing/InvoiceCalculator.php et génère une suite de tests PHPUnit couvrant les cas nominaux, les arrondis et les montants négatifs.",
+      "resultat": "47 tests générés, couverture du module passée de 0 à 86 %. Deux bugs d'arrondi découverts au passage.",
+      "tempsGagne": "~1,5 j",
+      "replicabilite": "industrialisable",
+      "maturite": "adopte",
+      "tags": ["tests", "php", "legacy", "couverture"],
+      "votes": 17
+    },
+    {
+      "id": "cas-qa-jeux-donnees",
+      "titre": "Jeux de données de test réalistes",
+      "metier": "qa",
+      "auteur": "Awa Diallo",
+      "date": "2026-07-21",
+      "probleme": "Créer à la main des jeux de données variés (clients, commandes) pour la recette est long et peu représentatif.",
+      "methode": "Claude génère des jeux cohérents et anonymisés au format CSV/JSON à partir d'un schéma décrit en langage naturel, cas limites inclus.",
+      "outil": "Claude",
+      "resultat": "500 enregistrements générés en quelques minutes, avec des cas limites (noms accentués, dates extrêmes, valeurs nulles) souvent oubliés manuellement.",
+      "tempsGagne": "~4 h / campagne",
+      "replicabilite": "recurrent",
+      "maturite": "adopte",
+      "tags": ["recette", "données", "jeux-de-test"],
+      "votes": 12
+    },
+    {
+      "id": "cas-po-user-stories",
+      "titre": "Découpage d'epics en user stories",
+      "metier": "po",
+      "auteur": "Camille Roy",
+      "date": "2026-06-29",
+      "probleme": "Transformer une grosse demande métier floue en user stories prêtes pour le sprint, avec critères d'acceptation.",
+      "methode": "Claude part de la note de cadrage, propose un découpage en stories INVEST avec critères d'acceptation au format Given/When/Then, puis affine en dialogue.",
+      "outil": "Claude",
+      "prompt": "À partir de cette note de cadrage, propose un découpage en user stories INVEST avec critères d'acceptation au format Given/When/Then.",
+      "resultat": "Epic découpée en 9 stories estimables, critères d'acceptation prêts pour le refinement. Affinage en équipe deux fois plus rapide.",
+      "tempsGagne": "~3 h / epic",
+      "replicabilite": "recurrent",
+      "maturite": "adopte",
+      "tags": ["backlog", "user-stories", "gherkin"],
+      "votes": 9
+    },
+    {
+      "id": "cas-data-sql",
+      "titre": "Requêtes SQL à partir d'une question métier",
+      "metier": "data",
+      "auteur": "Élodie Marchand",
+      "date": "2026-08-04",
+      "probleme": "Les demandes ad hoc des métiers (« top 10 des produits par marge sur le trimestre ») mobilisent un analyste pour écrire le SQL.",
+      "methode": "Claude reçoit le schéma des tables et la question en français, produit la requête SQL commentée, que l'analyste valide et exécute.",
+      "outil": "Claude",
+      "prompt": "Schéma : tables ventes, produits, clients (colonnes ci-dessous). Écris une requête SQL donnant le top 10 des produits par marge sur le dernier trimestre.",
+      "resultat": "Requêtes correctes du premier coup dans 8 cas sur 10 ; l'analyste se concentre sur l'interprétation plutôt que sur la syntaxe.",
+      "tempsGagne": "~30 min / demande",
+      "replicabilite": "recurrent",
+      "maturite": "teste",
+      "tags": ["sql", "analytics", "self-service"],
+      "votes": 11
+    },
+    {
+      "id": "cas-pm-comptes-rendus",
+      "titre": "Comptes-rendus à partir des notes brutes",
+      "metier": "pm",
+      "auteur": "Thomas Mercier",
+      "date": "2026-07-10",
+      "probleme": "Rédiger un compte-rendu clair après chaque comité prenait 45 min et était souvent repoussé.",
+      "methode": "Claude reçoit les notes brutes (ou la transcription) et produit un CR structuré : décisions, actions avec responsables, points en suspens.",
+      "outil": "Claude",
+      "resultat": "CR prêt à diffuser en 5 min, format homogène pour toute l'équipe, plus aucun CR en retard.",
+      "tempsGagne": "~40 min / réunion",
+      "replicabilite": "recurrent",
+      "maturite": "industrialise",
+      "tags": ["compte-rendu", "réunion", "synthèse"],
+      "votes": 14
+    },
+    {
+      "id": "cas-ops-runbook",
+      "titre": "Rédaction de runbooks d'incident",
+      "metier": "ops",
+      "auteur": "Sophie Lemoine",
+      "date": "2026-08-12",
+      "probleme": "Les procédures de remédiation d'incident vivaient dans la tête de deux personnes, jamais formalisées.",
+      "methode": "Après résolution d'un incident, Claude Code transforme l'historique des commandes et les échanges en runbook structuré (symptômes, diagnostic, remédiation, prévention).",
+      "outil": "Claude Code",
+      "resultat": "6 runbooks formalisés en deux semaines, réutilisés en astreinte par des personnes qui n'avaient pas géré l'incident initial.",
+      "tempsGagne": "~2 h / runbook",
+      "replicabilite": "recurrent",
+      "maturite": "teste",
+      "tags": ["runbook", "incident", "documentation", "astreinte"],
+      "votes": 8
+    }
+  ],
+  "avantApres": [
+    {
+      "id": "ap-dev-revue",
+      "titre": "Revue d'une pull request",
+      "metier": "dev",
+      "tache": "Première passe de revue sur une PR de taille moyenne (~400 lignes).",
+      "avant": { "temps": "45 min", "effort": 4, "qualite": 3, "desc": "Lecture manuelle ligne à ligne, fatigue, oublis sur les cas limites." },
+      "apres": { "temps": "12 min", "effort": 2, "qualite": 4, "desc": "Claude Code pré-analyse la PR, signale risques et incohérences ; le dev valide et tranche." },
+      "gain": "−73 % de temps",
+      "gainPct": 73
+    },
+    {
+      "id": "ap-qa-cas-test",
+      "titre": "Rédaction d'un plan de cas de test",
+      "metier": "qa",
+      "tache": "Couvrir une nouvelle fonctionnalité par un plan de test complet.",
+      "avant": { "temps": "3 h", "effort": 4, "qualite": 3, "desc": "Rédaction manuelle, couverture des cas limites variable selon la fatigue." },
+      "apres": { "temps": "50 min", "effort": 2, "qualite": 4, "desc": "Claude propose une matrice de cas (nominaux, limites, erreurs) ; la QA complète et priorise." },
+      "gain": "−72 % de temps",
+      "gainPct": 72
+    },
+    {
+      "id": "ap-po-specs",
+      "titre": "Rédaction d'une spécification fonctionnelle",
+      "metier": "po",
+      "tache": "Spécifier une fonctionnalité de bout en bout à partir du besoin.",
+      "avant": { "temps": "4 h", "effort": 4, "qualite": 3, "desc": "Page blanche, allers-retours, structure réinventée à chaque fois." },
+      "apres": { "temps": "1 h 30", "effort": 2, "qualite": 4, "desc": "Claude génère une trame structurée à compléter ; le PO se concentre sur les arbitrages métier." },
+      "gain": "−63 % de temps",
+      "gainPct": 63
+    },
+    {
+      "id": "ap-data-doc",
+      "titre": "Documentation d'un schéma de données",
+      "metier": "data",
+      "tache": "Documenter les tables et colonnes d'un nouveau pipeline.",
+      "avant": { "temps": "2 h 30", "effort": 3, "qualite": 2, "desc": "Documentation fastidieuse, souvent repoussée puis périmée." },
+      "apres": { "temps": "35 min", "effort": 2, "qualite": 4, "desc": "Claude génère un dictionnaire de données à partir du DDL ; l'analyste relit et enrichit." },
+      "gain": "−77 % de temps",
+      "gainPct": 77
+    },
+    {
+      "id": "ap-pm-reporting",
+      "titre": "Reporting hebdomadaire d'avancement",
+      "metier": "pm",
+      "tache": "Consolider l'avancement des chantiers pour le point hebdo.",
+      "avant": { "temps": "1 h 15", "effort": 3, "qualite": 3, "desc": "Collecte manuelle, copier-coller, mise en forme à refaire chaque semaine." },
+      "apres": { "temps": "20 min", "effort": 1, "qualite": 4, "desc": "Claude synthétise les mises à jour en un reporting prêt à diffuser, au format constant." },
+      "gain": "−73 % de temps",
+      "gainPct": 73
+    }
+  ],
+  "rex": [
+    {
+      "id": "rex-1",
+      "titre": "REX 1",
+      "date": "2026-08-15",
+      "periode": "M0 → M2",
+      "statut": "fait",
+      "synthese": "Deux premiers mois encourageants. L'adoption a démarré fort chez les profils techniques (Dev, QA), portée par des gains immédiats, et progresse plus lentement sur les métiers moins à l'aise avec le terminal. Les premiers cas d'usage récurrents sont identifiés et commencent à circuler entre métiers.",
+      "chiffres": [
+        { "label": "Taux d'adoption", "valeur": "47 %" },
+        { "label": "Heures gagnées (cumul)", "valeur": "290 h" },
+        { "label": "Satisfaction", "valeur": "7,7 / 10" },
+        { "label": "Cas d'usage déployés", "valeur": "3" }
+      ],
+      "aMarche": [
+        "Adoption rapide côté Dev et QA, avec des gains tangibles sur la génération de tests et la revue de code.",
+        "Émergence d'un catalogue de cas d'usage réplicables (tests, comptes-rendus, requêtes SQL).",
+        "Partage spontané de prompts et d'astuces lors d'un point hebdomadaire informel.",
+        "Gain de temps déjà mesurable sur les tâches répétitives, sans dégradation de qualité."
+      ],
+      "freins": [
+        "Prise en main de Claude Code plus difficile hors profils techniques (aisance avec le terminal).",
+        "Besoin de clarifier la charte d'usage des données avant de généraliser certains cas.",
+        "Qualité variable des résultats quand le contexte fourni est insuffisant : formuler un bon prompt reste un apprentissage."
+      ],
+      "recommandation": "Poursuivre le POC en l'état. Prioriser l'accompagnement des profils non techniques (binômage, mémo de démarrage) et formaliser la charte d'usage des données avant le REX 2.",
+      "lienLivrable": ""
+    },
+    {
+      "id": "rex-2",
+      "titre": "REX 2",
+      "date": "2026-10-15",
+      "periode": "M2 → M4",
+      "statut": "a-venir",
+      "synthese": "À venir (mi-octobre 2026).",
+      "chiffres": [],
+      "aMarche": [],
+      "freins": [],
+      "recommandation": "",
+      "lienLivrable": ""
+    },
+    {
+      "id": "rex-3",
+      "titre": "REX 3",
+      "date": "2026-12-15",
+      "periode": "M4 → M6",
+      "statut": "a-venir",
+      "synthese": "À venir (mi-décembre 2026).",
+      "chiffres": [],
+      "aMarche": [],
+      "freins": [],
+      "recommandation": "",
+      "lienLivrable": ""
+    }
+  ],
+  "questionnaires": {
+    "amont": [
+      { "q": "Quels outils ou usages d'IA utilisez-vous déjà aujourd'hui ?", "type": "Ouverte" },
+      { "q": "Quel est votre niveau d'usage actuel de l'IA ?", "type": "Échelle 0–10" },
+      { "q": "Quel est votre niveau d'aisance avec la ligne de commande / le terminal ?", "type": "Échelle 0–10", "aide": "Clé pour Claude Code, en particulier hors profils techniques." },
+      { "q": "Combien d'heures par semaine y consacrez-vous aujourd'hui ?", "type": "Nombre (h)", "aide": "Sert de point de référence (baseline) pour mesurer le temps gagné." },
+      { "q": "Quelles tâches répétitives aimeriez-vous déléguer à l'IA ?", "type": "Ouverte" },
+      { "q": "Sur quels travaux attendez-vous le plus de valeur ?", "type": "Choix multiple", "aide": "Specs, code, tests, documentation, revue, analyse…" },
+      { "q": "Quel type de données manipulez-vous (sensibilité, confidentialité) ?", "type": "Choix multiple", "aide": "Publiques, internes, confidentielles, données personnelles…" },
+      { "q": "Quelle est votre appétence à utiliser l'IA au quotidien ?", "type": "Échelle 0–10", "aide": "À reposer en fin de POC pour mesurer l'évolution de l'enthousiasme." },
+      { "q": "Quelles réserves ou craintes avez-vous vis-à-vis de l'outil ?", "type": "Ouverte" },
+      { "q": "Un objectif personnel pour ce POC ?", "type": "Ouverte" },
+      { "q": "Pour vous, à quoi ressemble un POC réussi ?", "type": "Ouverte" }
+    ],
+    "mensuel": [
+      { "q": "Combien de jours cette semaine avez-vous utilisé Claude / Claude Code ?", "type": "Nombre", "kpi": "Taux d'adoption" },
+      { "q": "Combien d'interactions IA par semaine, en moyenne ?", "type": "Nombre", "kpi": "Fréquence d'usage" },
+      { "q": "Sur quels types de tâches l'avez-vous utilisé ?", "type": "Choix multiple", "aide": "Specs, code, tests, documentation, revue, analyse…" },
+      { "q": "Combien de tâches avez-vous réalisées avec l'aide de l'IA ?", "type": "Nombre", "kpi": "Tâches assistées" },
+      { "q": "Quel temps estimez-vous avoir gagné ce mois-ci ?", "type": "Nombre (h)", "kpi": "Heures gagnées · Temps gagné par métier" },
+      { "q": "Quelle est la qualité perçue des résultats de l'IA ce mois-ci ?", "type": "Échelle 0–10" },
+      { "q": "À quelle fréquence avez-vous dû reprendre ou corriger le travail de l'IA ?", "type": "Échelle", "aide": "De « jamais » à « très souvent » : mesure la fiabilité perçue." },
+      { "q": "Votre confiance dans l'outil a-t-elle évolué ce mois-ci ?", "type": "Tendance (↗ / → / ↘)" },
+      { "q": "Quelle est votre satisfaction globale ce mois-ci ?", "type": "Échelle 0–10", "kpi": "Satisfaction" },
+      { "q": "Recommanderiez-vous Claude / Claude Code à un collègue ?", "type": "Échelle 0–10", "kpi": "NPS", "aide": "Net Promoter Score (NPS)." },
+      { "q": "Avez-vous partagé un prompt ou une astuce avec l'équipe ce mois-ci ?", "type": "Oui / Non + précision" },
+      { "q": "Un cas d'usage marquant à partager ?", "type": "Ouverte", "kpi": "Cas d'usage déployés" },
+      { "q": "Y a-t-il eu un cas où vous auriez pu utiliser l'IA mais ne l'avez pas fait ? Pourquoi ?", "type": "Ouverte" },
+      { "q": "Avez-vous rencontré un frein ? Lequel ?", "type": "Ouverte", "kpi": "Météo du POC · REX" },
+      { "q": "Aujourd'hui, recommanderiez-vous de généraliser l'outil ?", "type": "Choix unique", "aide": "Oui / Plutôt oui / Plutôt non / Non — signal Go / No-Go pour le bilan." },
+      { "q": "Impact sur votre charge mentale et votre plaisir au travail ?", "type": "Tendance (↗ / → / ↘)" }
+    ]
+  },
+  "timeline": [
+    { "date": "2026-05-25", "label": "Aujourd'hui", "type": "jalon", "statut": "en-cours", "responsable": "SIX", "desc": "Pré-lancement — préparation du setup et cadrage du dashboard." },
+    { "date": "2026-06-01", "label": "Phase de setup (amont)", "type": "config", "statut": "a-venir", "responsable": "OPS / Sécurité", "desc": "Hors des 6 mois : proxy, accès, postes, sécurité, charte d'usage initiale." },
+    { "date": "2026-06-15", "label": "Démarrage du POC · M0", "type": "demarrage", "statut": "a-venir", "responsable": "SIX", "desc": "Lancement officiel des 6 mois de POC." },
+    { "date": "2026-08-15", "label": "REX 1 · M2", "type": "rex", "statut": "fait", "responsable": "PM", "desc": "Premier retour d'expérience (M0 → M2)." },
+    { "date": "2026-10-15", "label": "REX 2 · M4", "type": "rex", "statut": "a-venir", "responsable": "PM", "desc": "Deuxième retour d'expérience (M2 → M4)." },
+    { "date": "2026-12-15", "label": "REX 3 · M6", "type": "rex", "statut": "a-venir", "responsable": "PM", "desc": "Troisième retour d'expérience (M4 → M6) — fin des 6 mois." },
+    { "date": "2027-01-15", "label": "Bilan & décision", "type": "bilan", "statut": "a-venir", "responsable": "SIX + Direction", "desc": "Synthèse finale et décision de généralisation (après les 6 mois)." }
+  ]
+}

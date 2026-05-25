@@ -1,0 +1,66 @@
+name: Déploiement démo (GitHub Pages)
+
+# Construit le site statique et le publie sur GitHub Pages à chaque push sur main.
+# Démo : https://ludodwt.github.io/cc-poc/
+on:
+  push:
+    branches: [main]
+  workflow_dispatch: # déclenchement manuel depuis l'onglet Actions
+
+# Autorisations requises par l'action de déploiement Pages.
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Un seul déploiement à la fois ; on n'annule pas un déploiement en cours.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Installer pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Installer Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Installer les dépendances
+        run: pnpm install --frozen-lockfile
+
+      - name: Build
+        env:
+          # Sous-chemin du dépôt projet (https://<user>.github.io/cc-poc/).
+          BASE_PATH: /cc-poc/
+        run: pnpm build
+
+      - name: Fallback SPA (routes profondes BrowserRouter)
+        run: cp dist/index.html dist/404.html
+
+      - name: Configurer Pages
+        uses: actions/configure-pages@v5
+
+      - name: Uploader l'artefact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Déployer sur GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

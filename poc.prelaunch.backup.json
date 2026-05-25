@@ -1,0 +1,253 @@
+{
+  "_exemple": false,
+  "_note": "Données réelles : structure et calendrier du POC SIX. Le POC démarre le 15/06/2026 — les indicateurs sont à 0 et seront alimentés au fil de l'eau. Éditez ce fichier puis rafraîchissez (aucun rebuild en dev). Contrat documenté dans src/types/poc.ts.",
+  "meta": {
+    "nom": "POC Claude & Claude Code",
+    "sousTitre": "Équipe SIX · Système d'Information & Expérience digitale",
+    "dateConfig": "2026-06-01",
+    "dateM0": "2026-06-15",
+    "dateRex1": "2026-08-15",
+    "dateRex2": "2026-10-15",
+    "dateRex3": "2026-12-15",
+    "dateBilan": "2027-01-15",
+    "statut": "À venir · setup en amont à partir du 1er juin 2026",
+    "meteo": "vert",
+    "objectifs": [
+      "Automatiser les tâches répétitives : specs, user stories, tests, revue de code, comptes-rendus.",
+      "Gagner en productivité sur une équipe restreinte (9 personnes) et pluridisciplinaire.",
+      "Homogénéiser les pratiques entre métiers : documentation, qualité, manière de spécifier.",
+      "Capitaliser un catalogue de cas d'usage réplicables pour décider du passage à l'échelle (Go / No-go)."
+    ],
+    "prochaineEcheance": { "label": "Début du setup", "date": "2026-06-01" }
+  },
+  "kpisGlobaux": [
+    {
+      "id": "taux-adoption",
+      "label": "Taux d'adoption",
+      "valeur": 0,
+      "unite": "%",
+      "cible": 90,
+      "aide": "Part des 9 invités actifs sur 7 jours."
+    },
+    {
+      "id": "heures-gagnees",
+      "label": "Heures gagnées (cumul)",
+      "valeur": 0,
+      "unite": " h",
+      "aide": "Cumul estimé depuis le début."
+    },
+    {
+      "id": "taches-assistees",
+      "label": "Tâches assistées",
+      "valeur": 0,
+      "unite": "",
+      "aide": "Tâches réalisées avec l'aide de l'IA."
+    },
+    {
+      "id": "satisfaction",
+      "label": "Satisfaction",
+      "valeur": 0,
+      "unite": "/10",
+      "decimales": 1,
+      "cible": 8,
+      "aide": "Sondage pulse mensuel."
+    },
+    {
+      "id": "roi",
+      "label": "ROI estimé",
+      "valeur": 0,
+      "unite": "×",
+      "decimales": 1,
+      "aide": "Gains valorisés rapportés aux coûts."
+    },
+    {
+      "id": "cas-usage-deployes",
+      "label": "Cas d'usage déployés",
+      "valeur": 0,
+      "unite": "",
+      "aide": "Adoptés ou industrialisés."
+    },
+    {
+      "id": "frequence-usage",
+      "label": "Fréquence d'usage",
+      "valeur": 0,
+      "unite": " /sem.",
+      "decimales": 1,
+      "aide": "Interactions IA par utilisateur, en moyenne par semaine."
+    },
+    {
+      "id": "rex-realises",
+      "label": "REX réalisés",
+      "valeur": 0,
+      "unite": "/3",
+      "aide": "Retours d'expérience bimestriels (M2, M4, M6)."
+    }
+  ],
+  "metiers": [
+    {
+      "slug": "po",
+      "nom": "Product Owner",
+      "effectif": 4,
+      "pitch": "Rédaction et découpage du backlog, synthèse de feedback utilisateur.",
+      "kpis": [],
+      "casUsageIds": [],
+      "avantApresIds": [],
+      "verbatims": []
+    },
+    {
+      "slug": "pm",
+      "nom": "Project Manager",
+      "effectif": 3,
+      "pitch": "Comptes-rendus, reporting, communication et planification.",
+      "kpis": [],
+      "casUsageIds": [],
+      "avantApresIds": [],
+      "verbatims": []
+    },
+    {
+      "slug": "qa",
+      "nom": "QA",
+      "effectif": 5,
+      "pitch": "Cas de test, jeux de données, automatisation, analyse de logs.",
+      "kpis": [],
+      "casUsageIds": [],
+      "avantApresIds": [],
+      "verbatims": []
+    },
+    {
+      "slug": "dev",
+      "nom": "Développement",
+      "effectif": 14,
+      "pitch": "Génération et refactoring de code, tests, revue, documentation, debug.",
+      "kpis": [],
+      "casUsageIds": [],
+      "avantApresIds": [],
+      "verbatims": []
+    },
+    {
+      "slug": "ops",
+      "nom": "Ops / SRE",
+      "effectif": 6,
+      "pitch": "Scripts, IaC, runbooks, analyse d'incidents, requêtes monitoring.",
+      "kpis": [],
+      "casUsageIds": [],
+      "avantApresIds": [],
+      "verbatims": []
+    },
+    {
+      "slug": "uiux",
+      "nom": "UI / UX",
+      "effectif": 4,
+      "pitch": "Prototypage, microcopy, recherche utilisateur, accessibilité.",
+      "kpis": [],
+      "casUsageIds": [],
+      "avantApresIds": [],
+      "verbatims": []
+    },
+    {
+      "slug": "securite",
+      "nom": "Sécurité",
+      "effectif": 3,
+      "pitch": "Revue de code orientée sécurité, analyse de vulnérabilités, sensibilisation.",
+      "kpis": [],
+      "casUsageIds": [],
+      "avantApresIds": [],
+      "verbatims": []
+    },
+    {
+      "slug": "data",
+      "nom": "Data",
+      "effectif": 6,
+      "pitch": "Requêtes SQL, pipelines, analyse exploratoire, documentation de données.",
+      "kpis": [],
+      "casUsageIds": [],
+      "avantApresIds": [],
+      "verbatims": []
+    }
+  ],
+  "casUsage": [],
+  "avantApres": [],
+  "rex": [
+    {
+      "id": "rex-1",
+      "titre": "REX 1",
+      "date": "2026-08-15",
+      "periode": "M0 → M2",
+      "statut": "a-venir",
+      "synthese": "À venir (mi-août 2026).",
+      "chiffres": [],
+      "aMarche": [],
+      "freins": [],
+      "recommandation": "",
+      "lienLivrable": ""
+    },
+    {
+      "id": "rex-2",
+      "titre": "REX 2",
+      "date": "2026-10-15",
+      "periode": "M2 → M4",
+      "statut": "a-venir",
+      "synthese": "À venir (mi-octobre 2026).",
+      "chiffres": [],
+      "aMarche": [],
+      "freins": [],
+      "recommandation": "",
+      "lienLivrable": ""
+    },
+    {
+      "id": "rex-3",
+      "titre": "REX 3",
+      "date": "2026-12-15",
+      "periode": "M4 → M6",
+      "statut": "a-venir",
+      "synthese": "À venir (mi-décembre 2026).",
+      "chiffres": [],
+      "aMarche": [],
+      "freins": [],
+      "recommandation": "",
+      "lienLivrable": ""
+    }
+  ],
+  "questionnaires": {
+    "amont": [
+      { "q": "Quels outils ou usages d'IA utilisez-vous déjà aujourd'hui ?", "type": "Ouverte" },
+      { "q": "Quel est votre niveau d'usage actuel de l'IA ?", "type": "Échelle 0–10" },
+      { "q": "Quel est votre niveau d'aisance avec la ligne de commande / le terminal ?", "type": "Échelle 0–10", "aide": "Clé pour Claude Code, en particulier hors profils techniques." },
+      { "q": "Combien d'heures par semaine y consacrez-vous aujourd'hui ?", "type": "Nombre (h)", "aide": "Sert de point de référence (baseline) pour mesurer le temps gagné." },
+      { "q": "Quelles tâches répétitives aimeriez-vous déléguer à l'IA ?", "type": "Ouverte" },
+      { "q": "Sur quels travaux attendez-vous le plus de valeur ?", "type": "Choix multiple", "aide": "Specs, code, tests, documentation, revue, analyse…" },
+      { "q": "Quel type de données manipulez-vous (sensibilité, confidentialité) ?", "type": "Choix multiple", "aide": "Publiques, internes, confidentielles, données personnelles…" },
+      { "q": "Quelle est votre appétence à utiliser l'IA au quotidien ?", "type": "Échelle 0–10", "aide": "À reposer en fin de POC pour mesurer l'évolution de l'enthousiasme." },
+      { "q": "Quelles réserves ou craintes avez-vous vis-à-vis de l'outil ?", "type": "Ouverte" },
+      { "q": "Un objectif personnel pour ce POC ?", "type": "Ouverte" },
+      { "q": "Pour vous, à quoi ressemble un POC réussi ?", "type": "Ouverte" }
+    ],
+    "mensuel": [
+      { "q": "Combien de jours cette semaine avez-vous utilisé Claude / Claude Code ?", "type": "Nombre", "kpi": "Taux d'adoption" },
+      { "q": "Combien d'interactions IA par semaine, en moyenne ?", "type": "Nombre", "kpi": "Fréquence d'usage" },
+      { "q": "Sur quels types de tâches l'avez-vous utilisé ?", "type": "Choix multiple", "aide": "Specs, code, tests, documentation, revue, analyse…" },
+      { "q": "Combien de tâches avez-vous réalisées avec l'aide de l'IA ?", "type": "Nombre", "kpi": "Tâches assistées" },
+      { "q": "Quel temps estimez-vous avoir gagné ce mois-ci ?", "type": "Nombre (h)", "kpi": "Heures gagnées · Temps gagné par métier" },
+      { "q": "Quelle est la qualité perçue des résultats de l'IA ce mois-ci ?", "type": "Échelle 0–10" },
+      { "q": "À quelle fréquence avez-vous dû reprendre ou corriger le travail de l'IA ?", "type": "Échelle", "aide": "De « jamais » à « très souvent » : mesure la fiabilité perçue." },
+      { "q": "Votre confiance dans l'outil a-t-elle évolué ce mois-ci ?", "type": "Tendance (↗ / → / ↘)" },
+      { "q": "Quelle est votre satisfaction globale ce mois-ci ?", "type": "Échelle 0–10", "kpi": "Satisfaction" },
+      { "q": "Recommanderiez-vous Claude / Claude Code à un collègue ?", "type": "Échelle 0–10", "aide": "Net Promoter Score (NPS)." },
+      { "q": "Avez-vous partagé un prompt ou une astuce avec l'équipe ce mois-ci ?", "type": "Oui / Non + précision" },
+      { "q": "Un cas d'usage marquant à partager ?", "type": "Ouverte", "kpi": "Cas d'usage déployés" },
+      { "q": "Y a-t-il eu un cas où vous auriez pu utiliser l'IA mais ne l'avez pas fait ? Pourquoi ?", "type": "Ouverte" },
+      { "q": "Avez-vous rencontré un frein ? Lequel ?", "type": "Ouverte", "kpi": "Météo du POC · REX" },
+      { "q": "Aujourd'hui, recommanderiez-vous de généraliser l'outil ?", "type": "Choix unique", "aide": "Oui / Plutôt oui / Plutôt non / Non — signal Go / No-Go pour le bilan." },
+      { "q": "Impact sur votre charge mentale et votre plaisir au travail ?", "type": "Tendance (↗ / → / ↘)" }
+    ]
+  },
+  "timeline": [
+    { "date": "2026-05-25", "label": "Aujourd'hui", "type": "jalon", "statut": "en-cours", "responsable": "SIX", "desc": "Pré-lancement — préparation du setup et cadrage du dashboard." },
+    { "date": "2026-06-01", "label": "Phase de setup (amont)", "type": "config", "statut": "a-venir", "responsable": "OPS / Sécurité", "desc": "Hors des 6 mois : proxy, accès, postes, sécurité, charte d'usage initiale." },
+    { "date": "2026-06-15", "label": "Démarrage du POC · M0", "type": "demarrage", "statut": "a-venir", "responsable": "SIX", "desc": "Lancement officiel des 6 mois de POC." },
+    { "date": "2026-08-15", "label": "REX 1 · M2", "type": "rex", "statut": "a-venir", "responsable": "PM", "desc": "Premier retour d'expérience (M0 → M2)." },
+    { "date": "2026-10-15", "label": "REX 2 · M4", "type": "rex", "statut": "a-venir", "responsable": "PM", "desc": "Deuxième retour d'expérience (M2 → M4)." },
+    { "date": "2026-12-15", "label": "REX 3 · M6", "type": "rex", "statut": "a-venir", "responsable": "PM", "desc": "Troisième retour d'expérience (M4 → M6) — fin des 6 mois." },
+    { "date": "2027-01-15", "label": "Bilan & décision", "type": "bilan", "statut": "a-venir", "responsable": "SIX + Direction", "desc": "Synthèse finale et décision de généralisation (après les 6 mois)." }
+  ]
+}
