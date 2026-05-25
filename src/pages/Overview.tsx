@@ -20,7 +20,8 @@ export default function Overview() {
     <DataGate
       render={(d) => {
         const jours = joursRestants(d.meta.prochaineEcheance.date);
-        const prochains = d.timeline.filter((j) => j.statut !== 'fait').slice(0, 6);
+        // Résumé aligné sur la page Timeline : toutes les étapes, y compris celles déjà faites.
+        const etapes = d.timeline;
         const verbatims = d.metiers.flatMap((m) => m.verbatims).slice(0, 3);
         const demarre = Date.now() >= new Date(d.meta.dateM0).getTime();
 
@@ -120,7 +121,7 @@ export default function Overview() {
                     POC sur 6 mois · 3 REX bimestriels · bilan en janvier 2027
                   </p>
                   <ol className="relative ml-1 space-y-4 border-l">
-                    {prochains.map((j) => {
+                    {etapes.map((j) => {
                       const reste = joursRestants(j.date);
                       return (
                         <li key={j.date} className="relative flex items-start gap-3 pl-6" data-reveal>
@@ -141,6 +142,8 @@ export default function Overview() {
                           </div>
                           {j.statut === 'en-cours' ? (
                             <span className="mono shrink-0 text-xs font-medium text-primary">en cours</span>
+                          ) : j.statut === 'fait' ? (
+                            <span className="mono shrink-0 text-xs text-success">fait</span>
                           ) : (
                             reste > 0 && (
                               <span className="mono shrink-0 text-xs text-muted-foreground">

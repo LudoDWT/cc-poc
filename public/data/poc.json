@@ -451,8 +451,8 @@
       "titre": "REX 2",
       "date": "2026-10-15",
       "periode": "M2 → M4",
-      "statut": "a-venir",
-      "synthese": "À venir (mi-octobre 2026).",
+      "statut": "en-cours",
+      "synthese": "En préparation — restitution prévue mi-octobre 2026.",
       "chiffres": [],
       "aMarche": [],
       "freins": [],
@@ -507,11 +507,11 @@
     ]
   },
   "timeline": [
-    { "date": "2026-05-25", "label": "Aujourd'hui", "type": "jalon", "statut": "en-cours", "responsable": "SIX", "desc": "Pré-lancement — préparation du setup et cadrage du dashboard." },
-    { "date": "2026-06-01", "label": "Phase de setup (amont)", "type": "config", "statut": "a-venir", "responsable": "OPS / Sécurité", "desc": "Hors des 6 mois : proxy, accès, postes, sécurité, charte d'usage initiale." },
-    { "date": "2026-06-15", "label": "Démarrage du POC · M0", "type": "demarrage", "statut": "a-venir", "responsable": "SIX", "desc": "Lancement officiel des 6 mois de POC." },
+    { "date": "2026-05-25", "label": "Pré-lancement", "type": "jalon", "statut": "fait", "responsable": "SIX", "desc": "Pré-lancement — préparation du setup et cadrage du dashboard." },
+    { "date": "2026-06-01", "label": "Phase de setup (amont)", "type": "config", "statut": "fait", "responsable": "OPS / Sécurité", "desc": "Hors des 6 mois : proxy, accès, postes, sécurité, charte d'usage initiale." },
+    { "date": "2026-06-15", "label": "Démarrage du POC · M0", "type": "demarrage", "statut": "fait", "responsable": "SIX", "desc": "Lancement officiel des 6 mois de POC." },
     { "date": "2026-08-15", "label": "REX 1 · M2", "type": "rex", "statut": "fait", "responsable": "PM", "desc": "Premier retour d'expérience (M0 → M2)." },
-    { "date": "2026-10-15", "label": "REX 2 · M4", "type": "rex", "statut": "a-venir", "responsable": "PM", "desc": "Deuxième retour d'expérience (M2 → M4)." },
+    { "date": "2026-10-15", "label": "REX 2 · M4", "type": "rex", "statut": "en-cours", "responsable": "PM", "desc": "Deuxième retour d'expérience (M2 → M4)." },
     { "date": "2026-12-15", "label": "REX 3 · M6", "type": "rex", "statut": "a-venir", "responsable": "PM", "desc": "Troisième retour d'expérience (M4 → M6) — fin des 6 mois." },
     { "date": "2027-01-15", "label": "Bilan & décision", "type": "bilan", "statut": "a-venir", "responsable": "SIX + Direction", "desc": "Synthèse finale et décision de généralisation (après les 6 mois)." }
   ]
