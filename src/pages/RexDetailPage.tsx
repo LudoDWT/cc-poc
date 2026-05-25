@@ -93,27 +93,25 @@ function Section({
   );
 }
 
-function StatCard({
+function PerimetreItem({
   icon: Icon,
   label,
-  value,
+  children,
 }: {
   icon: typeof Users;
   label: string;
-  value: string;
+  children: React.ReactNode;
 }) {
   return (
-    <Card data-reveal className="gap-0">
-      <CardContent className="flex items-start gap-3">
-        <span className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
-          <Icon className="size-4" />
-        </span>
-        <div className="min-w-0">
-          <p className="eyebrow">{label}</p>
-          <p className="mono mt-0.5 text-xl font-semibold">{value}</p>
-        </div>
-      </CardContent>
-    </Card>
+    <div className="flex items-center gap-3 sm:px-5 sm:first:pl-0 sm:last:pr-0">
+      <span className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
+        <Icon className="size-4" />
+      </span>
+      <div className="min-w-0">
+        <p className="eyebrow">{label}</p>
+        <div className="mt-0.5 text-sm font-semibold">{children}</div>
+      </div>
+    </div>
   );
 }
 
@@ -323,28 +321,24 @@ function RexDetail({ d, rex }: { d: PocData; rex: Rex }) {
         <Section id="contexte" icon={BadgeCheck} eyebrow="Cadre" title="Contexte & périmètre">
           {dossier && <p className="mb-5 max-w-3xl text-sm leading-relaxed text-muted-foreground" data-reveal>{dossier.contexte}</p>}
           {dossier && (
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-              <StatCard icon={Users} label="Participants" value={String(dossier.perimetre.participants)} />
-              <StatCard icon={Layers} label="Métiers" value={String(dossier.perimetre.metiers)} />
-              <StatCard icon={CalendarDays} label="Période" value={dossier.perimetre.duree} />
-              <Card data-reveal className="gap-0">
-                <CardContent className="flex items-start gap-3">
-                  <span className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
-                    <Wrench className="size-4" />
+            <Card data-reveal>
+              <CardContent className="grid grid-cols-2 gap-6 sm:grid-cols-4 sm:gap-0 sm:divide-x sm:divide-border">
+                <PerimetreItem icon={Users} label="Participants">
+                  <span className="mono">{dossier.perimetre.participants}</span>
+                </PerimetreItem>
+                <PerimetreItem icon={Layers} label="Métiers">
+                  <span className="mono">{dossier.perimetre.metiers}</span>
+                </PerimetreItem>
+                <PerimetreItem icon={CalendarDays} label="Période">
+                  {dossier.perimetre.duree}
+                </PerimetreItem>
+                <PerimetreItem icon={Wrench} label="Outils">
+                  <span className="font-normal text-muted-foreground">
+                    {dossier.perimetre.outils.join(' · ')}
                   </span>
-                  <div className="min-w-0">
-                    <p className="eyebrow">Outils</p>
-                    <div className="mt-1.5 flex flex-wrap gap-1.5">
-                      {dossier.perimetre.outils.map((o) => (
-                        <Badge key={o} tone="primary">
-                          {o}
-                        </Badge>
-                      ))}
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            </div>
+                </PerimetreItem>
+              </CardContent>
+            </Card>
           )}
         </Section>
 
