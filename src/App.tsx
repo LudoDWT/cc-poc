@@ -10,6 +10,7 @@ import MetierDetail from './pages/MetierDetail';
 import AvantApresPage from './pages/AvantApresPage';
 import CasUsagePage from './pages/CasUsagePage';
 import RexPage from './pages/RexPage';
+import RexDetailPage from './pages/RexDetailPage';
 import RexInternePage from './pages/RexInternePage';
 
 function ScrollToTop() {
@@ -46,6 +47,7 @@ export default function App() {
           <Route path="cas-usage" element={<CasUsagePage />} />
           <Route path="rex-interne" element={<RexInternePage />} />
           <Route path="rex" element={<RexPage />} />
+          <Route path="rex/:id" element={<RexDetailPage />} />
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>

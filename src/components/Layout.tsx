@@ -85,6 +85,7 @@ interface Crumb {
 function buildCrumbs(
   pathname: string,
   metierNom: (slug: string) => string,
+  rexTitre: (id: string) => string,
 ): Crumb[] {
   if (pathname === '/') return [{ label: "Vue d'ensemble" }];
 
@@ -99,7 +100,12 @@ function buildCrumbs(
   }
 
   crumbs.push({ label: sectionLabel, to: sectionPath });
-  const leaf = segs[0] === 'metiers' ? metierNom(segs[1]) : segs[1];
+  const leaf =
+    segs[0] === 'metiers'
+      ? metierNom(segs[1])
+      : segs[0] === 'rex'
+        ? rexTitre(segs[1])
+        : segs[1];
   crumbs.push({ label: leaf });
   return crumbs;
 }
@@ -193,7 +199,8 @@ export default function Layout() {
 
   const metierNom = (slug: string) =>
     data?.metiers.find((m) => m.slug === slug)?.nom ?? slug.toUpperCase();
-  const crumbs = buildCrumbs(pathname, metierNom);
+  const rexTitre = (id: string) => data?.rex.find((r) => r.id === id)?.titre ?? id;
+  const crumbs = buildCrumbs(pathname, metierNom, rexTitre);
 
   return (
     <SidebarProvider>

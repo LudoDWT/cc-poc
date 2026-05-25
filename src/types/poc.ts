@@ -84,6 +84,62 @@ export interface ChiffreRex {
   valeur: string;
 }
 
+// --- Dossier de validation (REX détaillé pour les validateurs) ---
+export type StatutConformite = 'conforme' | 'en-cours' | 'a-traiter';
+export type Niveau = 'faible' | 'moyen' | 'eleve';
+
+export interface MontantLabel {
+  label: string;
+  valeur: string;
+}
+
+export interface DossierPerimetre {
+  participants: number;
+  metiers: number;
+  duree: string;
+  outils: string[];
+}
+
+export interface DossierRoi {
+  synthese: string;
+  couts: MontantLabel[];
+  gains: MontantLabel[];
+  ratio: string;
+  payback?: string;
+}
+
+export interface LigneEvaluation {
+  titre: string;
+  statut?: StatutConformite;
+  detail: string;
+}
+
+export interface LigneRisque {
+  risque: string;
+  impact: Niveau;
+  probabilite: Niveau;
+  mitigation: string;
+}
+
+export type SensDecision = 'go' | 'go-conditionnel' | 'no-go';
+
+export interface DossierDecision {
+  sens: SensDecision;
+  recommandation: string;
+  conditions?: string[];
+}
+
+export interface DossierRex {
+  contexte: string;
+  perimetre: DossierPerimetre;
+  roi: DossierRoi;
+  securite: LigneEvaluation[];
+  gouvernance: LigneEvaluation[];
+  conformite: LigneEvaluation[];
+  risques: LigneRisque[];
+  decision: DossierDecision;
+}
+
 export interface Rex {
   id: string;
   titre: string;
@@ -96,6 +152,7 @@ export interface Rex {
   freins: string[];
   recommandation: string;
   lienLivrable?: string;
+  dossier?: DossierRex; // présent quand un dossier de validation détaillé existe
 }
 
 export interface Jalon {

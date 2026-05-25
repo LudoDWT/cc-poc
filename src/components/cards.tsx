@@ -1,6 +1,7 @@
 import type { ComponentType } from 'react';
 import { Link } from 'react-router-dom';
 import {
+  ArrowRight,
   Bug,
   Code2,
   Crown,
@@ -288,6 +289,15 @@ export function RexCard({ rex }: { rex: Rex }) {
             <p className="eyebrow mb-1">Recommandation</p>
             <p className="text-sm text-foreground">{rex.recommandation}</p>
           </div>
+        )}
+
+        {rex.dossier && (
+          <Link
+            to={`/rex/${rex.id}`}
+            className="mt-4 inline-flex items-center gap-1.5 rounded-lg bg-primary px-3.5 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
+          >
+            Voir le dossier détaillé <ArrowRight className="size-4" />
+          </Link>
         )}
       </CardContent>
     </Card>

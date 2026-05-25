@@ -1,5 +1,5 @@
 import type { BadgeTone } from '../components/ui';
-import type { Maturite, Replicabilite, StatutJalon } from '../types/poc';
+import type { Maturite, Niveau, Replicabilite, StatutConformite, StatutJalon } from '../types/poc';
 
 export const LABEL_MATURITE: Record<Maturite, string> = {
   idee: 'Idée',
@@ -33,6 +33,32 @@ export const LABEL_STATUT: Record<StatutJalon, string> = {
   fait: 'Fait',
   'en-cours': 'En cours',
   'a-venir': 'À venir',
+};
+
+// Statut de conformité (dossier de validation : sécurité, conformité…).
+export const LABEL_CONFORMITE: Record<StatutConformite, string> = {
+  conforme: 'Conforme',
+  'en-cours': 'En cours',
+  'a-traiter': 'À traiter',
+};
+
+export const TONE_CONFORMITE: Record<StatutConformite, BadgeTone> = {
+  conforme: 'success',
+  'en-cours': 'warning',
+  'a-traiter': 'destructive',
+};
+
+// Niveau d'impact / de probabilité d'un risque.
+export const LABEL_NIVEAU: Record<Niveau, string> = {
+  faible: 'Faible',
+  moyen: 'Moyen',
+  eleve: 'Élevé',
+};
+
+export const TONE_NIVEAU: Record<Niveau, BadgeTone> = {
+  faible: 'success',
+  moyen: 'warning',
+  eleve: 'destructive',
 };
 
 // Couleur d'accent décorative par métier (valeurs vives, lisibles sur les deux thèmes).

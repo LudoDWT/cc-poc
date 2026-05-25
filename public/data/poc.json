@@ -444,7 +444,68 @@
         "Qualité variable des résultats quand le contexte fourni est insuffisant : formuler un bon prompt reste un apprentissage."
       ],
       "recommandation": "Poursuivre le POC en l'état. Prioriser l'accompagnement des profils non techniques (binômage, mémo de démarrage) et formaliser la charte d'usage des données avant le REX 2.",
-      "lienLivrable": ""
+      "lienLivrable": "",
+      "dossier": {
+        "contexte": "POC mené par l'équipe SIX (9 participants, 8 métiers) sur 6 mois pour évaluer l'apport de Claude et Claude Code sur les tâches du quotidien. Ce dossier consolide le premier jalon (REX 1, M0 → M2) sous l'angle des critères attendus en validation : valeur produite, ROI, sécurité SSI, gouvernance et conformité.",
+        "perimetre": {
+          "participants": 9,
+          "metiers": 8,
+          "duree": "M0 → M2 (2 mois)",
+          "outils": ["Claude (web)", "Claude Code (CLI)"]
+        },
+        "roi": {
+          "synthese": "Sur 2 mois, 290 h économisées pour un coût engagé d'environ 12 000 € (licences, sécurisation, accompagnement). Le ROI est déjà positif (~1,45×) et suit une trajectoire cohérente avec la cible de 4× visée à M6.",
+          "couts": [
+            { "label": "Licences (9 sièges · 2 mois)", "valeur": "≈ 4 500 €" },
+            { "label": "Setup & sécurisation (OPS / SSI)", "valeur": "≈ 5 000 €" },
+            { "label": "Accompagnement & formation", "valeur": "≈ 2 500 €" }
+          ],
+          "gains": [
+            { "label": "290 h économisées (≈ 60 €/h)", "valeur": "≈ 17 400 €" },
+            { "label": "Réduction des délais de livraison", "valeur": "Qualitatif" },
+            { "label": "Moins de reprises (qualité)", "valeur": "Qualitatif" }
+          ],
+          "ratio": "≈ 1,45× à M2",
+          "payback": "≈ 6 semaines"
+        },
+        "securite": [
+          { "titre": "Hébergement & flux réseau", "statut": "conforme", "detail": "Accès via proxy interne maîtrisé : aucun flux direct poste → éditeur du modèle. Trafic journalisé." },
+          { "titre": "Données transmises au modèle", "statut": "en-cours", "detail": "Périmètre limité aux données internes non sensibles. Classification en cours de formalisation avant toute ouverture aux données confidentielles." },
+          { "titre": "Rétention & entraînement", "statut": "conforme", "detail": "Offre entreprise : pas d'entraînement sur les données soumises, rétention contractuellement limitée." },
+          { "titre": "Gestion des secrets", "statut": "a-traiter", "detail": "Règle d'exclusion des secrets et clés des prompts ; scan pre-commit à généraliser sur tous les postes." },
+          { "titre": "Revue du code généré", "statut": "conforme", "detail": "Tout code produit passe par la revue habituelle (PR + tests). Aucun merge automatique." }
+        ],
+        "gouvernance": [
+          { "titre": "Sponsor & comité de pilotage", "detail": "Sponsor SIX et comité de pilotage bimestriel calé sur les REX (M2 / M4 / M6)." },
+          { "titre": "Référents métier", "detail": "Un référent par métier pour diffuser les bonnes pratiques et faire remonter les freins." },
+          { "titre": "Charte d'usage IA", "detail": "Charte v1 diffusée à tous les participants ; mise à jour prévue avant le REX 2 (volet données)." },
+          { "titre": "Catalogue de cas d'usage", "detail": "Cas qualifiés (maturité, réplicabilité) et validés avant toute industrialisation." },
+          { "titre": "Mesure & restitution", "detail": "Pulse mensuel auprès des 9 participants + restitution bimestrielle aux parties prenantes." }
+        ],
+        "conformite": [
+          { "titre": "RGPD / données personnelles", "statut": "conforme", "detail": "Aucune donnée personnelle de tiers manipulée dans le périmètre actuel." },
+          { "titre": "Classification des données", "statut": "en-cours", "detail": "Grille publique / interne / confidentielle en cours d'application à chaque cas d'usage." },
+          { "titre": "Propriété intellectuelle du code", "statut": "conforme", "detail": "Code généré assimilé à une production interne, soumis à revue ; pas de dépendance introduite sans validation." },
+          { "titre": "Charte & traçabilité", "statut": "conforme", "detail": "Usage encadré par la charte IA interne ; cas d'usage documentés et tracés." },
+          { "titre": "Auditabilité", "statut": "en-cours", "detail": "Journalisation des accès via le proxy ; piste d'audit à compléter pour le bilan." }
+        ],
+        "risques": [
+          { "risque": "Fuite de données sensibles via les prompts", "impact": "eleve", "probabilite": "faible", "mitigation": "Périmètre données limité + charte + scan de secrets + sensibilisation continue." },
+          { "risque": "Dépendance à l'outil / réversibilité", "impact": "moyen", "probabilite": "moyen", "mitigation": "Cas d'usage documentés et reproductibles ; aucun verrou technique fort." },
+          { "risque": "Qualité variable des résultats", "impact": "moyen", "probabilite": "moyen", "mitigation": "Revue systématique + montée en compétence sur le prompting." },
+          { "risque": "Adoption hétérogène (profils non techniques)", "impact": "moyen", "probabilite": "eleve", "mitigation": "Binômage, mémo de démarrage, accompagnement ciblé." },
+          { "risque": "Coût à l'échelle", "impact": "moyen", "probabilite": "faible", "mitigation": "Suivi du ROI par métier ; déploiement progressif piloté par la valeur." }
+        ],
+        "decision": {
+          "sens": "go-conditionnel",
+          "recommandation": "Poursuivre le POC et préparer l'extension du périmètre. Go conditionnel à la finalisation de la classification des données et de la charte avant le REX 2.",
+          "conditions": [
+            "Finaliser la grille de classification des données et l'intégrer à la charte d'usage.",
+            "Généraliser le scan de secrets pre-commit sur tous les postes.",
+            "Renforcer l'accompagnement des profils non techniques."
+          ]
+        }
+      }
     },
     {
       "id": "rex-2",
