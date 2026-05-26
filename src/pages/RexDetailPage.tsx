@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import {
   ArrowLeft,
@@ -8,6 +8,7 @@ import {
   Clock,
   Coins,
   FileCheck2,
+  FileDown,
   Layers,
   Scale,
   ShieldCheck,
@@ -31,7 +32,7 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
-import { formatDateFr } from '../lib/format';
+import { formatDateFr, nf } from '../lib/format';
 import {
   LABEL_CONFORMITE,
   LABEL_NIVEAU,
@@ -39,7 +40,16 @@ import {
   TONE_NIVEAU,
   couleurMetier,
 } from '../lib/labels';
-import type { ChiffreRex, LigneEvaluation, PocData, Rex, SensDecision } from '../types/poc';
+import type {
+  ChiffreRex,
+  LigneEvaluation,
+  LigneRisque,
+  Niveau,
+  PocData,
+  Rex,
+  SensDecision,
+  StatutConformite,
+} from '../types/poc';
 
 const SENS_LABEL: Record<SensDecision, string> = {
   go: 'Go',
@@ -64,6 +74,12 @@ function splitChiffre(v: string): { prefix: string; num: number; dec: number; su
     dec: decPart ? decPart.length : 0,
     suffix: v.slice(m.index + raw.length),
   };
+}
+
+// Extrait le montant numérique d'un libellé monétaire ("≈ 4 500 €" -> 4500) ; null si non chiffré.
+function montantNum(v: string): number | null {
+  const m = v.replace(/\s/g, '').match(/-?\d+(?:[.,]\d+)?/);
+  return m ? parseFloat(m[0].replace(',', '.')) : null;
 }
 
 function Section({
@@ -117,6 +133,11 @@ function PerimetreItem({
 
 function ChiffreCard({ c }: { c: ChiffreRex }) {
   const parsed = splitChiffre(c.valeur);
+  const cibleParsed = c.cible ? splitChiffre(c.cible) : null;
+  const pct =
+    parsed && cibleParsed && cibleParsed.num > 0
+      ? Math.min(100, Math.round((parsed.num / cibleParsed.num) * 100))
+      : null;
   return (
     <Card data-reveal className="gap-0">
       <CardContent>
@@ -132,15 +153,50 @@ function ChiffreCard({ c }: { c: ChiffreRex }) {
           <p className="mono text-3xl font-semibold tracking-tight">{c.valeur}</p>
         )}
         <p className="mt-1 text-xs leading-tight text-muted-foreground">{c.label}</p>
+        {c.cible && pct !== null && (
+          <div className="mt-3">
+            <div className="h-1.5 w-full overflow-hidden rounded-full bg-secondary">
+              <div className="h-full rounded-full bg-primary" style={{ width: `${pct}%` }} />
+            </div>
+            <p className="mt-1.5 text-[0.7rem] leading-tight text-muted-foreground">
+              {pct} % de l'objectif&nbsp;· cible {c.cible}
+            </p>
+          </div>
+        )}
       </CardContent>
     </Card>
   );
 }
 
+const ORDRE_STATUT: StatutConformite[] = ['conforme', 'en-cours', 'a-traiter'];
+const PLURIEL_CONFORMITE: Record<StatutConformite, string> = {
+  conforme: 'conformes',
+  'en-cours': 'en cours',
+  'a-traiter': 'à traiter',
+};
+
 function EvalList({ items }: { items: LigneEvaluation[] }) {
+  const counts = items.reduce<Record<StatutConformite, number>>(
+    (acc, it) => {
+      if (it.statut) acc[it.statut] += 1;
+      return acc;
+    },
+    { conforme: 0, 'en-cours': 0, 'a-traiter': 0 },
+  );
+  const hasStatuts = ORDRE_STATUT.some((s) => counts[s] > 0);
   return (
     <Card data-reveal>
       <CardContent>
+        {hasStatuts && (
+          <div className="mb-4 flex flex-wrap gap-2 border-b pb-4">
+            {ORDRE_STATUT.filter((s) => counts[s] > 0).map((s) => (
+              <Badge key={s} tone={TONE_CONFORMITE[s]}>
+                {counts[s]}{' '}
+                {counts[s] > 1 ? PLURIEL_CONFORMITE[s] : LABEL_CONFORMITE[s].toLowerCase()}
+              </Badge>
+            ))}
+          </div>
+        )}
         <ul className="divide-y divide-border">
           {items.map((it, i) => (
             <li
@@ -159,6 +215,97 @@ function EvalList({ items }: { items: LigneEvaluation[] }) {
             </li>
           ))}
         </ul>
+      </CardContent>
+    </Card>
+  );
+}
+
+// --- Matrice des risques (impact x probabilité) ---
+const NIVEAUX: Niveau[] = ['faible', 'moyen', 'eleve'];
+type RisqueTone = 'success' | 'warning' | 'destructive';
+
+// Criticité d'une cellule = somme des index impact + probabilité (0 à 4).
+function criticite(somme: number): RisqueTone {
+  if (somme <= 1) return 'success';
+  if (somme === 2) return 'warning';
+  return 'destructive';
+}
+const CELL_BG: Record<RisqueTone, string> = {
+  success: 'border-success/20 bg-success/5',
+  warning: 'border-warning/20 bg-warning/5',
+  destructive: 'border-destructive/20 bg-destructive/5',
+};
+const PASTILLE: Record<RisqueTone, string> = {
+  success: 'bg-success/15 text-success',
+  warning: 'bg-warning/15 text-warning',
+  destructive: 'bg-destructive/15 text-destructive',
+};
+
+function MatriceRisques({ risques }: { risques: LigneRisque[] }) {
+  const niv = (n: Niveau) => NIVEAUX.indexOf(n);
+  const lignes = [...NIVEAUX].reverse(); // impact élevé en haut, faible en bas
+  return (
+    <Card data-reveal>
+      <CardContent>
+        <div className="flex gap-2">
+          <span className="eyebrow flex items-center rotate-180 text-muted-foreground [writing-mode:vertical-rl]">
+            Impact
+          </span>
+          <div className="min-w-0 flex-1">
+            <div className="grid grid-cols-[3.5rem_repeat(3,minmax(0,1fr))] gap-1.5">
+              {lignes.map((impact) => (
+                <Fragment key={impact}>
+                  <div className="flex items-center justify-end pr-1 text-right text-xs text-muted-foreground">
+                    {LABEL_NIVEAU[impact]}
+                  </div>
+                  {NIVEAUX.map((proba) => {
+                    const tone = criticite(niv(impact) + niv(proba));
+                    const items = risques
+                      .map((r, i) => ({ r, n: i + 1 }))
+                      .filter((x) => x.r.impact === impact && x.r.probabilite === proba);
+                    return (
+                      <div
+                        key={proba}
+                        className={`flex min-h-[3.25rem] flex-wrap content-center items-center justify-center gap-1 rounded-lg border ${CELL_BG[tone]}`}
+                      >
+                        {items.map((x) => (
+                          <span
+                            key={x.n}
+                            className={`flex size-6 items-center justify-center rounded-full text-xs font-semibold ${PASTILLE[tone]}`}
+                          >
+                            {x.n}
+                          </span>
+                        ))}
+                      </div>
+                    );
+                  })}
+                </Fragment>
+              ))}
+              <div />
+              {NIVEAUX.map((proba) => (
+                <div key={proba} className="pt-1 text-center text-xs text-muted-foreground">
+                  {LABEL_NIVEAU[proba]}
+                </div>
+              ))}
+            </div>
+            <p className="eyebrow mt-2 text-center text-muted-foreground">Probabilité</p>
+          </div>
+        </div>
+        <ol className="mt-5 grid gap-2 border-t pt-4 text-sm sm:grid-cols-2">
+          {risques.map((r, i) => {
+            const tone = criticite(niv(r.impact) + niv(r.probabilite));
+            return (
+              <li key={i} className="flex items-start gap-2.5">
+                <span
+                  className={`mt-0.5 flex size-5 shrink-0 items-center justify-center rounded-full text-[0.7rem] font-semibold ${PASTILLE[tone]}`}
+                >
+                  {i + 1}
+                </span>
+                <span className="text-muted-foreground">{r.risque}</span>
+              </li>
+            );
+          })}
+        </ol>
       </CardContent>
     </Card>
   );
@@ -249,6 +396,28 @@ function RexDetail({ d, rex }: { d: PocData; rex: Rex }) {
   const adoption = d.kpisGlobaux.find((k) => k.id === 'taux-adoption');
   const heures = d.kpisGlobaux.find((k) => k.id === 'heures-gagnees');
 
+  // Jalon de fin de période (ex. "M2") dérivé de rex.periode, et rythme des REX.
+  const jalonFin = rex.periode.split('→').pop()?.trim() ?? '';
+  const rythmeRex = d.rex
+    .map((r) => r.periode.split('→').pop()?.trim())
+    .filter(Boolean)
+    .join(' · ');
+
+  // ROI : ratio atteint vs cible globale, et totaux coûts / gains chiffrés.
+  const roiCible = d.kpisGlobaux.find((k) => k.id === 'roi')?.cible;
+  const ratioNum = dossier ? splitChiffre(dossier.roi.ratio)?.num ?? null : null;
+  const totalCouts = dossier
+    ? dossier.roi.couts.reduce((s, c) => s + (montantNum(c.valeur) ?? 0), 0)
+    : 0;
+  const totalGains = dossier
+    ? dossier.roi.gains.reduce((s, g) => s + (montantNum(g.valeur) ?? 0), 0)
+    : 0;
+
+  // Navigation d'un REX à l'autre.
+  const idxRex = d.rex.findIndex((r) => r.id === rex.id);
+  const rexPrec = idxRex > 0 ? d.rex[idxRex - 1] : null;
+  const rexSuiv = idxRex >= 0 && idxRex < d.rex.length - 1 ? d.rex[idxRex + 1] : null;
+
   const parMetier = d.metiers
     .map((m) => ({ label: m.nom, valeur: m.kpis[0]?.valeur ?? 0, color: couleurMetier(m.slug) }))
     .filter((x) => x.valeur > 0)
@@ -300,6 +469,18 @@ function RexDetail({ d, rex }: { d: PocData; rex: Rex }) {
             </Badge>
           )}
         </div>
+        {rex.lienLivrable && (
+          <a
+            href={rex.lienLivrable}
+            target="_blank"
+            rel="noreferrer"
+            className="mt-5 inline-flex items-center gap-2 rounded-lg border bg-card px-3.5 py-2 text-sm font-medium transition-colors hover:border-primary/40 hover:bg-primary/10 hover:text-primary"
+            data-reveal
+          >
+            <FileDown className="size-4 text-primary" />
+            Télécharger le dossier (PDF)
+          </a>
+        )}
       </PageHeader>
 
       {/* Sommaire mobile : chips horizontales (le sommaire sticky est réservé au desktop). */}
@@ -344,7 +525,12 @@ function RexDetail({ d, rex }: { d: PocData; rex: Rex }) {
 
         {/* Chiffres clés */}
         {rex.chiffres.length > 0 && (
-          <Section id="chiffres" icon={TrendingUp} eyebrow="Mesure" title="Chiffres clés (à M2)">
+          <Section
+            id="chiffres"
+            icon={TrendingUp}
+            eyebrow="Mesure"
+            title={jalonFin ? `Chiffres clés (à ${jalonFin})` : 'Chiffres clés'}
+          >
             <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
               {rex.chiffres.map((c) => (
                 <ChiffreCard key={c.label} c={c} />
@@ -391,6 +577,21 @@ function RexDetail({ d, rex }: { d: PocData; rex: Rex }) {
                   <div>
                     <p className="text-xs text-muted-foreground">ROI estimé</p>
                     <p className="mono text-3xl font-semibold text-primary">{dossier.roi.ratio}</p>
+                    {roiCible != null && ratioNum != null && (
+                      <div className="mt-2">
+                        <div className="h-1.5 w-full overflow-hidden rounded-full bg-primary/15">
+                          <div
+                            className="h-full rounded-full bg-primary"
+                            style={{
+                              width: `${Math.min(100, Math.round((ratioNum / roiCible) * 100))}%`,
+                            }}
+                          />
+                        </div>
+                        <p className="mt-1.5 text-xs text-muted-foreground">
+                          Objectif {nf(roiCible)}× à M6
+                        </p>
+                      </div>
+                    )}
                   </div>
                   {dossier.roi.payback && (
                     <div>
@@ -401,6 +602,20 @@ function RexDetail({ d, rex }: { d: PocData; rex: Rex }) {
                 </CardContent>
               </Card>
             </div>
+            {(totalCouts > 0 || totalGains > 0) && (
+              <Card data-reveal className="mt-4">
+                <CardContent>
+                  <p className="eyebrow mb-3">Coûts engagés vs gains mesurés</p>
+                  <HBar
+                    data={[
+                      { label: 'Coûts engagés', valeur: totalCouts, color: 'var(--destructive)' },
+                      { label: 'Gains mesurés', valeur: totalGains, color: 'var(--success)' },
+                    ]}
+                    unite=" €"
+                  />
+                </CardContent>
+              </Card>
+            )}
           </Section>
         )}
 
@@ -457,7 +672,8 @@ function RexDetail({ d, rex }: { d: PocData; rex: Rex }) {
         {/* Risques */}
         {dossier && (
           <Section id="risques" icon={TriangleAlert} eyebrow="Maîtrise" title="Risques & mitigations">
-            <Card data-reveal>
+            <MatriceRisques risques={dossier.risques} />
+            <Card data-reveal className="mt-4">
               <CardContent className="px-0 sm:px-6">
                 <Table>
                   <TableHeader>
@@ -592,7 +808,7 @@ function RexDetail({ d, rex }: { d: PocData; rex: Rex }) {
             </CardContent>
           </Card>
           <p className="mt-4 text-xs text-muted-foreground" data-reveal>
-            Document vivant, mis à jour à chaque jalon (REX M2 · M4 · M6). Dernière consolidation&nbsp;:{' '}
+            Document vivant, mis à jour à chaque jalon (REX {rythmeRex}). Dernière consolidation&nbsp;:{' '}
             {formatDateFr(rex.date)}.
           </p>
         </Section>
@@ -603,6 +819,42 @@ function RexDetail({ d, rex }: { d: PocData; rex: Rex }) {
           <Sommaire active={active} />
         </aside>
       </div>
+
+      {(rexPrec || rexSuiv) && (
+        <nav
+          className="mt-12 flex items-stretch justify-between gap-4 border-t pt-6"
+          aria-label="Navigation entre les REX"
+        >
+          {rexPrec ? (
+            <Link
+              to={`/rex/${rexPrec.id}`}
+              className="group inline-flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
+            >
+              <ArrowLeft className="size-4 shrink-0 transition-transform group-hover:-translate-x-0.5" />
+              <span>
+                <span className="block text-xs">REX précédent</span>
+                <span className="font-medium text-foreground">{rexPrec.titre}</span>
+              </span>
+            </Link>
+          ) : (
+            <span />
+          )}
+          {rexSuiv ? (
+            <Link
+              to={`/rex/${rexSuiv.id}`}
+              className="group inline-flex items-center gap-2 text-right text-sm text-muted-foreground transition-colors hover:text-foreground"
+            >
+              <span>
+                <span className="block text-xs">REX suivant</span>
+                <span className="font-medium text-foreground">{rexSuiv.titre}</span>
+              </span>
+              <ArrowRight className="size-4 shrink-0 transition-transform group-hover:translate-x-0.5" />
+            </Link>
+          ) : (
+            <span />
+          )}
+        </nav>
+      )}
     </>
   );
 }

@@ -82,6 +82,7 @@ export interface AvantApres {
 export interface ChiffreRex {
   label: string;
   valeur: string;
+  cible?: string; // objectif visé (ex. "90 %") : affiche une barre de progression
 }
 
 // --- Dossier de validation (REX détaillé pour les validateurs) ---

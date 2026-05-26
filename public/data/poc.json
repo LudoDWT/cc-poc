@@ -427,9 +427,9 @@
       "statut": "fait",
       "synthese": "Deux premiers mois encourageants. L'adoption a démarré fort chez les profils techniques (Dev, QA), portée par des gains immédiats, et progresse plus lentement sur les métiers moins à l'aise avec le terminal. Les premiers cas d'usage récurrents sont identifiés et commencent à circuler entre métiers.",
       "chiffres": [
-        { "label": "Taux d'adoption", "valeur": "47 %" },
+        { "label": "Taux d'adoption", "valeur": "47 %", "cible": "90 %" },
         { "label": "Heures gagnées (cumul)", "valeur": "290 h" },
-        { "label": "Satisfaction", "valeur": "7,7 / 10" },
+        { "label": "Satisfaction", "valeur": "7,7 / 10", "cible": "8 / 10" },
         { "label": "Cas d'usage déployés", "valeur": "3" }
       ],
       "aMarche": [
@@ -444,7 +444,7 @@
         "Qualité variable des résultats quand le contexte fourni est insuffisant : formuler un bon prompt reste un apprentissage."
       ],
       "recommandation": "Poursuivre le POC en l'état. Prioriser l'accompagnement des profils non techniques (binômage, mémo de démarrage) et formaliser la charte d'usage des données avant le REX 2.",
-      "lienLivrable": "",
+      "lienLivrable": "https://ludodwt.github.io/cc-poc/livrables/rex-1-dossier.pdf",
       "dossier": {
         "contexte": "POC mené par l'équipe SIX (9 participants, 8 métiers) sur 6 mois pour évaluer l'apport de Claude et Claude Code sur les tâches du quotidien. Ce dossier consolide le premier jalon (REX 1, M0 → M2) sous l'angle des critères attendus en validation : valeur produite, ROI, sécurité SSI, gouvernance et conformité.",
         "perimetre": {
