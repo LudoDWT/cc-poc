@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useState, type ComponentType } from 'react';
+import { Fragment, Suspense, useEffect, useState, type ComponentType } from 'react';
 import { NavLink, Outlet, useLocation } from 'react-router-dom';
 import {
   ArrowRightLeft,
@@ -28,6 +28,7 @@ import {
 } from '@/components/ui/breadcrumb';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
+import { Skeleton } from '@/components/ui/skeleton';
 import {
   Sidebar,
   SidebarContent,
@@ -191,6 +192,24 @@ function AppSidebar() {
   );
 }
 
+// Affiché pendant le téléchargement du chunk d'une page (code-splitting). Repris du
+// squelette de DataGate pour une transition cohérente avant que la donnée ne charge.
+function PageFallback() {
+  return (
+    <div className="space-y-6" aria-busy="true" aria-label="Chargement de la page">
+      <div className="space-y-3">
+        <Skeleton className="h-4 w-32" />
+        <Skeleton className="h-10 w-2/3 max-w-md" />
+      </div>
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        {Array.from({ length: 4 }, (_, i) => (
+          <Skeleton key={i} className="h-36 rounded-xl" />
+        ))}
+      </div>
+    </div>
+  );
+}
+
 export default function Layout() {
   const [theme, toggleTheme] = useTheme();
   const { pathname } = useLocation();
@@ -241,7 +260,9 @@ export default function Layout() {
         </header>
 
         <main ref={mainRef} className="mx-auto w-full max-w-6xl flex-1 px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
-          <Outlet />
+          <Suspense fallback={<PageFallback />}>
+            <Outlet />
+          </Suspense>
         </main>
       </SidebarInset>
     </SidebarProvider>

@@ -1,17 +1,20 @@
-import { useEffect } from 'react';
+import { lazy, useEffect } from 'react';
 import { Link, Route, Routes, useLocation } from 'react-router-dom';
 import Layout from './components/Layout';
 import { EmptyState } from './components/ui';
-import Overview from './pages/Overview';
-import TimelinePage from './pages/TimelinePage';
-import KpiPage from './pages/KpiPage';
-import Metiers from './pages/Metiers';
-import MetierDetail from './pages/MetierDetail';
-import AvantApresPage from './pages/AvantApresPage';
-import CasUsagePage from './pages/CasUsagePage';
-import RexPage from './pages/RexPage';
-import RexDetailPage from './pages/RexDetailPage';
-import RexInternePage from './pages/RexInternePage';
+
+// Pages chargées à la demande (code-splitting) : seul le shell est dans le bundle
+// initial, chaque route (et ses dépendances, ex. recharts) arrive dans son propre chunk.
+const Overview = lazy(() => import('./pages/Overview'));
+const TimelinePage = lazy(() => import('./pages/TimelinePage'));
+const KpiPage = lazy(() => import('./pages/KpiPage'));
+const Metiers = lazy(() => import('./pages/Metiers'));
+const MetierDetail = lazy(() => import('./pages/MetierDetail'));
+const AvantApresPage = lazy(() => import('./pages/AvantApresPage'));
+const CasUsagePage = lazy(() => import('./pages/CasUsagePage'));
+const RexPage = lazy(() => import('./pages/RexPage'));
+const RexDetailPage = lazy(() => import('./pages/RexDetailPage'));
+const RexInternePage = lazy(() => import('./pages/RexInternePage'));
 
 function ScrollToTop() {
   const { pathname } = useLocation();
