@@ -45,7 +45,7 @@ Organisation :
 ## Conventions
 
 - **Contenu en français.** Identifiants de code en anglais.
-- **Jamais de tiret cadratin (« — »)** dans le contenu. Remplacer selon le contexte : libellé -> « : », apposition -> « , », marque -> « · », séquence -> « → ».
+- **Jamais de tiret cadratin** (em dash, U+2014) dans le contenu. Remplacer selon le contexte : libellé -> « : », apposition -> « , », marque -> « · », séquence -> « → ».
 - **Tons de badge sémantiques** centralisés dans `src/lib/labels.ts` (`TONE_MATURITE`, `TONE_REPLICABILITE`, `TONE_CONFORMITE`, `TONE_NIVEAU`). Ne pas hardcoder de couleurs dans les pages.
 - Animations : ajouter `data-reveal` sur un élément pour la révélation au scroll (GSAP, respecte `prefers-reduced-motion`).
 - Tailwind v4 (config via `@tailwindcss/vite`, pas de `tailwind.config.js`). Thème clair/sombre via la classe `dark` sur `<html>`.
