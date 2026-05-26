@@ -16,6 +16,7 @@ import {
 } from 'lucide-react';
 
 import { gsap, useGSAP } from '@/lib/gsap';
+import { prefetchRoute } from '@/lib/pages';
 import { usePageTransition } from '@/hooks/usePageTransition';
 import { usePocData } from '@/hooks/usePocData';
 import {
@@ -159,7 +160,12 @@ function AppSidebar() {
                 return (
                   <SidebarMenuItem key={item.to} data-nav-item>
                     <SidebarMenuButton asChild isActive={active} tooltip={item.label}>
-                      <NavLink to={item.to} end={item.end}>
+                      <NavLink
+                        to={item.to}
+                        end={item.end}
+                        onMouseEnter={() => prefetchRoute(item.to)}
+                        onFocus={() => prefetchRoute(item.to)}
+                      >
                         <item.icon className="size-4" />
                         <span>{item.label}</span>
                       </NavLink>

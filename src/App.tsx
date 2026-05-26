@@ -1,20 +1,9 @@
-import { lazy, useEffect } from 'react';
+import { useEffect } from 'react';
 import { Link, Route, Routes, useLocation } from 'react-router-dom';
 import Layout from './components/Layout';
 import { EmptyState } from './components/ui';
-
-// Pages chargées à la demande (code-splitting) : seul le shell est dans le bundle
-// initial, chaque route (et ses dépendances, ex. recharts) arrive dans son propre chunk.
-const Overview = lazy(() => import('./pages/Overview'));
-const TimelinePage = lazy(() => import('./pages/TimelinePage'));
-const KpiPage = lazy(() => import('./pages/KpiPage'));
-const Metiers = lazy(() => import('./pages/Metiers'));
-const MetierDetail = lazy(() => import('./pages/MetierDetail'));
-const AvantApresPage = lazy(() => import('./pages/AvantApresPage'));
-const CasUsagePage = lazy(() => import('./pages/CasUsagePage'));
-const RexPage = lazy(() => import('./pages/RexPage'));
-const RexDetailPage = lazy(() => import('./pages/RexDetailPage'));
-const RexInternePage = lazy(() => import('./pages/RexInternePage'));
+// Pages chargées à la demande (code-splitting) + prefetch au survol : cf. src/lib/pages.ts.
+import { Pages } from './lib/pages';
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -41,16 +30,16 @@ export default function App() {
       <ScrollToTop />
       <Routes>
         <Route element={<Layout />}>
-          <Route index element={<Overview />} />
-          <Route path="timeline" element={<TimelinePage />} />
-          <Route path="kpi" element={<KpiPage />} />
-          <Route path="metiers" element={<Metiers />} />
-          <Route path="metiers/:slug" element={<MetierDetail />} />
-          <Route path="avant-apres" element={<AvantApresPage />} />
-          <Route path="cas-usage" element={<CasUsagePage />} />
-          <Route path="rex-interne" element={<RexInternePage />} />
-          <Route path="rex" element={<RexPage />} />
-          <Route path="rex/:id" element={<RexDetailPage />} />
+          <Route index element={<Pages.Overview />} />
+          <Route path="timeline" element={<Pages.TimelinePage />} />
+          <Route path="kpi" element={<Pages.KpiPage />} />
+          <Route path="metiers" element={<Pages.Metiers />} />
+          <Route path="metiers/:slug" element={<Pages.MetierDetail />} />
+          <Route path="avant-apres" element={<Pages.AvantApresPage />} />
+          <Route path="cas-usage" element={<Pages.CasUsagePage />} />
+          <Route path="rex-interne" element={<Pages.RexInternePage />} />
+          <Route path="rex" element={<Pages.RexPage />} />
+          <Route path="rex/:id" element={<Pages.RexDetailPage />} />
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
