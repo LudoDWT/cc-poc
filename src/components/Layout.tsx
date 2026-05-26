@@ -1,4 +1,4 @@
-import { Fragment, Suspense, useEffect, useState, type ComponentType } from 'react';
+import { Fragment, Suspense, type ComponentType } from 'react';
 import { NavLink, Outlet, useLocation } from 'react-router-dom';
 import {
   ArrowRightLeft,
@@ -10,8 +10,6 @@ import {
   Lightbulb,
   Mail,
   MessageSquareQuote,
-  Moon,
-  Sun,
   Users,
 } from 'lucide-react';
 
@@ -27,7 +25,6 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from '@/components/ui/breadcrumb';
-import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import { Skeleton } from '@/components/ui/skeleton';
 import {
@@ -63,20 +60,6 @@ const NAV: NavItem[] = [
   { to: '/rex-interne', label: 'REX interne', icon: ClipboardList, end: true },
   { to: '/rex', label: 'REX externe', icon: MessageSquareQuote, end: true },
 ];
-
-type Theme = 'light' | 'dark';
-
-function useTheme(): [Theme, () => void] {
-  const [theme, setTheme] = useState<Theme>(
-    () => (localStorage.getItem('six-theme') as Theme) || 'light',
-  );
-  useEffect(() => {
-    document.documentElement.classList.toggle('dark', theme === 'dark');
-    localStorage.setItem('six-theme', theme);
-    window.dispatchEvent(new Event('themechange'));
-  }, [theme]);
-  return [theme, () => setTheme((t) => (t === 'light' ? 'dark' : 'light'))];
-}
 
 interface Crumb {
   label: string;
@@ -217,7 +200,6 @@ function PageFallback() {
 }
 
 export default function Layout() {
-  const [theme, toggleTheme] = useTheme();
   const { pathname } = useLocation();
   const { data } = usePocData();
   const mainRef = usePageTransition<HTMLElement>(pathname);
@@ -252,17 +234,6 @@ export default function Layout() {
               ))}
             </BreadcrumbList>
           </Breadcrumb>
-          <div className="ml-auto flex items-center gap-1.5">
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={toggleTheme}
-              aria-label="Basculer le thème"
-              title="Basculer le thème"
-            >
-              {theme === 'light' ? <Moon className="size-4" /> : <Sun className="size-4" />}
-            </Button>
-          </div>
         </header>
 
         <main ref={mainRef} className="mx-auto w-full max-w-6xl flex-1 px-4 py-8 sm:px-6 sm:py-12 lg:px-8">

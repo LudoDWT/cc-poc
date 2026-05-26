@@ -48,7 +48,7 @@ Organisation :
 - **Jamais de tiret cadratin** (em dash, U+2014) dans le contenu. Remplacer selon le contexte : libellé -> « : », apposition -> « , », marque -> « · », séquence -> « → ».
 - **Tons de badge sémantiques** centralisés dans `src/lib/labels.ts` (`TONE_MATURITE`, `TONE_REPLICABILITE`, `TONE_CONFORMITE`, `TONE_NIVEAU`). Ne pas hardcoder de couleurs dans les pages.
 - Animations : ajouter `data-reveal` sur un élément pour la révélation au scroll (GSAP, respecte `prefers-reduced-motion`).
-- Tailwind v4 (config via `@tailwindcss/vite`, pas de `tailwind.config.js`). Thème clair/sombre via la classe `dark` sur `<html>`.
+- Tailwind v4 (config via `@tailwindcss/vite`, pas de `tailwind.config.js`). **Thème sombre uniquement** : la classe `dark` est figée sur `<html>` dans `index.html` (aucun toggle). La palette claire (`:root` dans `src/index.css`) reste définie mais inerte ; pour réactiver un sélecteur clair/sombre, recréer un bouton qui bascule la classe `dark`.
 - Alias d'import : `@/` -> `src/`.
 
 ## Recettes courantes
