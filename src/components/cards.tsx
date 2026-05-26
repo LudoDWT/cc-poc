@@ -25,6 +25,7 @@ import {
   couleurMetier,
 } from '../lib/labels';
 import { formatDateCourteFr } from '../lib/format';
+import { prefetchRoute } from '../lib/pages';
 
 const METEO: Record<Meteo, { dot: string; label: string }> = {
   vert: { dot: 'bg-success', label: 'Au vert' },
@@ -85,6 +86,8 @@ export function MetierCard({ metier }: { metier: Metier }) {
   return (
     <Link
       to={`/metiers/${metier.slug}`}
+      onMouseEnter={() => prefetchRoute(`/metiers/${metier.slug}`)}
+      onFocus={() => prefetchRoute(`/metiers/${metier.slug}`)}
       className="group flex h-full flex-col rounded-xl border bg-card p-6 text-card-foreground shadow-sm transition-[box-shadow,border-color] duration-300 hover:border-foreground/20 hover:shadow-md"
       data-reveal
     >
@@ -294,6 +297,8 @@ export function RexCard({ rex }: { rex: Rex }) {
         {rex.dossier && (
           <Link
             to={`/rex/${rex.id}`}
+            onMouseEnter={() => prefetchRoute(`/rex/${rex.id}`)}
+            onFocus={() => prefetchRoute(`/rex/${rex.id}`)}
             className="mt-4 inline-flex items-center gap-1.5 rounded-lg bg-primary px-3.5 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
           >
             Voir le dossier détaillé <ArrowRight className="size-4" />

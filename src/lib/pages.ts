@@ -41,13 +41,23 @@ const byPath: Record<string, () => Promise<unknown>> = {
   '/rex': loaders.rex,
 };
 
-const prefetched = new Set<string>();
+type Loader = () => Promise<unknown>;
 
-/** Précharge le chunk d'une route (survol/focus d'un lien). Idempotent. */
+// Résout le loader d'un chemin : routes de nav (correspondance exacte) ou routes à
+// paramètre (/metiers/:slug, /rex/:id) par préfixe.
+function resolveLoader(path: string): Loader | undefined {
+  if (byPath[path]) return byPath[path];
+  if (path.startsWith('/metiers/')) return loaders.metierDetail;
+  if (path.startsWith('/rex/')) return loaders.rexDetail;
+  return undefined;
+}
+
+const prefetched = new Set<Loader>();
+
+/** Précharge le chunk d'une route (survol/focus d'un lien). Idempotent par chunk. */
 export function prefetchRoute(path: string): void {
-  if (prefetched.has(path)) return;
-  const load = byPath[path];
-  if (!load) return;
-  prefetched.add(path);
+  const load = resolveLoader(path);
+  if (!load || prefetched.has(load)) return;
+  prefetched.add(load);
   void load();
 }
