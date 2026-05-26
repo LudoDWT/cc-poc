@@ -100,7 +100,7 @@
   --sidebar-border: oklch(0.9401 0 0);
   --sidebar-ring: oklch(0.7731 0 0);
 
-  /* Tokens sémantiques ajoutés — variantes plus lumineuses en sombre */
+  /* Tokens sémantiques ajoutés, variantes plus lumineuses en sombre */
   --success: oklch(0.7200 0.1500 162.0000);
   --success-foreground: oklch(0.2213 0.0038 106.7070);
   --warning: oklch(0.8000 0.1500 75.0000);

@@ -100,7 +100,7 @@ export default function KpiPage() {
             <div className="mt-8 text-xs text-muted-foreground">
               <Eyebrow>Note méthodo</Eyebrow>
               <span className="mt-1 block">
-                Les heures gagnées et le ROI sont des estimations déclaratives — la méthode de mesure
+                Les heures gagnées et le ROI sont des estimations déclaratives, la méthode de mesure
                 (déclaratif vs logs d'usage) reste à arbitrer (cf. cadrage).
               </span>
             </div>

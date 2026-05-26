@@ -123,11 +123,11 @@ export function CasUsageCard({ cas, metierNom }: { cas: CasUsage; metierNom?: st
         </div>
 
         <p className="mt-3 text-sm leading-snug text-muted-foreground">
-          <span className="font-medium text-foreground">Méthode — </span>
+          <span className="font-medium text-foreground">Méthode : </span>
           {cas.methode}
         </p>
         <p className="mt-2 text-sm leading-snug text-muted-foreground">
-          <span className="font-medium text-foreground">Résultat — </span>
+          <span className="font-medium text-foreground">Résultat : </span>
           {cas.resultat}
         </p>
 
@@ -315,7 +315,7 @@ export function VerbatimCard({ verbatim }: { verbatim: Verbatim }) {
         {verbatim.citation}
       </blockquote>
       <figcaption className="mt-4 text-xs text-muted-foreground">
-        — {verbatim.auteur}
+        {verbatim.auteur}
         {verbatim.metier ? ` · ${verbatim.metier}` : ''}
       </figcaption>
     </figure>

@@ -29,7 +29,7 @@ export default function AvantApresPage() {
 
             {d.avantApres.length === 0 ? (
               <EmptyState>
-                Aucune comparaison avant/après pour le moment — elles seront ajoutées dès les premiers
+                Aucune comparaison avant/après pour le moment, elles seront ajoutées dès les premiers
                 usages du POC.
               </EmptyState>
             ) : (
@@ -45,7 +45,7 @@ export default function AvantApresPage() {
                     </CardContent>
                   </Card>
                   {hall.length > 0 && (
-                    <ChartCard title="Hall of fame — plus gros gains" hint="% de temps gagné">
+                    <ChartCard title="Hall of fame : plus gros gains" hint="% de temps gagné">
                       <HBar data={hall} unite=" %" />
                     </ChartCard>
                   )}

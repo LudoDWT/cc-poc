@@ -90,7 +90,7 @@ const MENSUEL_DEFAUT: QuestionQuestionnaire[] = [
   {
     q: "Aujourd'hui, recommanderiez-vous de généraliser l'outil ?",
     type: 'Choix unique',
-    aide: 'Oui / Plutôt oui / Plutôt non / Non — signal Go / No-Go pour le bilan.',
+    aide: 'Oui / Plutôt oui / Plutôt non / Non : signal Go / No-Go pour le bilan.',
   },
   { q: 'Impact sur votre charge mentale et votre plaisir au travail ?', type: 'Tendance (↗ / → / ↘)' },
 ];
@@ -169,7 +169,7 @@ export default function RexInternePage() {
             <PageHeader
               eyebrow="Démarche & questionnaires"
               title="REX interne"
-              intro="Comment les chiffres du dashboard sont obtenus : on interroge l’équipe en amont (attentes), puis chaque mois pour mesurer. Ci-dessous, les questions posées aux participants — à titre illustratif."
+              intro="Comment les chiffres du dashboard sont obtenus : on interroge l’équipe en amont (attentes), puis chaque mois pour mesurer. Ci-dessous, les questions posées aux participants, à titre illustratif."
             />
 
             {/* Démarche en 3 temps */}
@@ -188,7 +188,7 @@ export default function RexInternePage() {
 
             {/* Questionnaire d'amont */}
             <section className="mb-10">
-              <Eyebrow>Questionnaire d’amont — attentes</Eyebrow>
+              <Eyebrow>Questionnaire d’amont : attentes</Eyebrow>
               <p className="mb-4 mt-1 text-sm text-muted-foreground">
                 Posé une fois, avant le démarrage, pour cadrer les objectifs et établir un point de référence.
               </p>
@@ -201,7 +201,7 @@ export default function RexInternePage() {
 
             {/* Pulse mensuel */}
             <section>
-              <Eyebrow>Pulse mensuel — mesure</Eyebrow>
+              <Eyebrow>Pulse mensuel : mesure</Eyebrow>
               <p className="mb-4 mt-1 text-sm text-muted-foreground">
                 Posé chaque mois. Chaque question alimente un indicateur précis du dashboard (étiquette
                 <span className="mx-1 inline-flex items-center rounded-full bg-primary/10 px-1.5 py-0.5 text-xs font-medium text-primary">

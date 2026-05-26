@@ -35,9 +35,9 @@ export default function TimelinePage() {
             </Card>
             <Card data-reveal className="border-primary ring-1 ring-primary/20">
               <CardContent>
-                <p className="eyebrow text-primary">Le POC — 6 mois</p>
+                <p className="eyebrow text-primary">Le POC · 6 mois</p>
                 <p className="mt-1 font-semibold">3 REX bimestriels</p>
-                <p className="mt-1 text-xs text-muted-foreground">REX1 · M2 — REX2 · M4 — REX3 · M6</p>
+                <p className="mt-1 text-xs text-muted-foreground">REX1 · M2 → REX2 · M4 → REX3 · M6</p>
                 <p className="mono mt-2 text-xs text-muted-foreground">
                   {formatDateCourteFr(d.meta.dateM0)} → {formatDateCourteFr(d.meta.dateRex3)}
                 </p>

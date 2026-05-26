@@ -1,4 +1,4 @@
-# Dashboard POC Claude — équipe SIX
+# Dashboard POC Claude · équipe SIX
 
 Mini-site **statique** de suivi du POC Claude / Claude Code (6 mois, 3 REX). Il affiche les
 KPI globaux et par métier, une timeline, des comparaisons avant/après IA, un catalogue de
@@ -43,7 +43,7 @@ C'est tout : le site est servi à l'adresse ci-dessus, rechargement à chaud act
 public/data/poc.json
 ```
 
-Éditez-le, puis **rafraîchissez le navigateur** — aucun rebuild nécessaire en mode `dev`.
+Éditez-le, puis **rafraîchissez le navigateur**, aucun rebuild nécessaire en mode `dev`.
 Le contrat (structure attendue) est documenté dans `src/types/poc.ts`.
 
 > Les données livrées sont des **données d'EXEMPLE** (champ `_exemple: true`). Remplacez-les
@@ -80,13 +80,13 @@ et Cloudflare Pages le font automatiquement ; sinon, copiez `index.html` en `404
 
 ## Fonctionnalités
 
-- **Vue d'ensemble** — pitch, KPI héros, météo du POC, prochaine échéance, adoption, verbatims.
-- **Timeline** — déroulé config → REX1/2/3 → bilan.
-- **KPI** — indicateurs consolidés + graphiques (adoption, heures gagnées, temps par métier, maturité).
-- **Métiers** — une vue par profil (PO, PM, QA, DEV, OPS, UI/UX, Sécurité, DATA).
-- **Avant / Après** — comparaisons temps / effort / qualité, hall of fame des gains.
-- **Cas d'usage** — catalogue filtrable (métier, maturité, recherche) + prompts.
-- **REX** — synthèses, chiffres, freins et recommandations.
+- **Vue d'ensemble** : pitch, KPI héros, météo du POC, prochaine échéance, adoption, verbatims.
+- **Timeline** : déroulé config → REX1/2/3 → bilan.
+- **KPI** : indicateurs consolidés + graphiques (adoption, heures gagnées, temps par métier, maturité).
+- **Métiers** : une vue par profil (PO, PM, QA, DEV, OPS, UI/UX, Sécurité, DATA).
+- **Avant / Après** : comparaisons temps / effort / qualité, hall of fame des gains.
+- **Cas d'usage** : catalogue filtrable (métier, maturité, recherche) + prompts.
+- **REX** : synthèses, chiffres, freins et recommandations.
 
 Bonus : thème clair/sombre, **mode présentation** (typo agrandie, chrome masqué) pour les
 comités, animations GSAP au scroll respectant `prefers-reduced-motion`.

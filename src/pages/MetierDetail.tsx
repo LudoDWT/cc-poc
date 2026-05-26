@@ -53,7 +53,7 @@ export default function MetierDetail() {
               aps.length === 0 &&
               m.verbatims.length === 0 && (
                 <EmptyState>
-                  Données à venir pour ce métier — indicateurs, cas d'usage, gains et verbatims
+                  Données à venir pour ce métier : indicateurs, cas d'usage, gains et verbatims
                   seront ajoutés au fil du POC.
                 </EmptyState>
               )}

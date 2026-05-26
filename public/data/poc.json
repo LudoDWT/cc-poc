@@ -126,7 +126,7 @@
       "unite": "",
       "tendance": "hausse",
       "variation": 8,
-      "aide": "Net Promoter Score — recommandation de l'outil par l'équipe.",
+      "aide": "Net Promoter Score : recommandation de l'outil par l'équipe.",
       "historique": [
         { "date": "2026-06-22", "valeur": 5 },
         { "date": "2026-07-15", "valeur": 18 },
@@ -160,7 +160,7 @@
       "casUsageIds": ["cas-po-user-stories"],
       "avantApresIds": ["ap-po-specs"],
       "verbatims": [
-        { "auteur": "Camille Roy", "metier": "Product Owner", "citation": "Le découpage d'epics qui me prenait une matinée est devenu un dialogue de vingt minutes — et le résultat est plus régulier." }
+        { "auteur": "Camille Roy", "metier": "Product Owner", "citation": "Le découpage d'epics qui me prenait une matinée est devenu un dialogue de vingt minutes, et le résultat est plus régulier." }
       ]
     },
     {
@@ -513,7 +513,7 @@
       "date": "2026-10-15",
       "periode": "M2 → M4",
       "statut": "en-cours",
-      "synthese": "En préparation — restitution prévue mi-octobre 2026.",
+      "synthese": "En préparation, restitution prévue mi-octobre 2026.",
       "chiffres": [],
       "aMarche": [],
       "freins": [],
@@ -563,17 +563,17 @@
       { "q": "Un cas d'usage marquant à partager ?", "type": "Ouverte", "kpi": "Cas d'usage déployés" },
       { "q": "Y a-t-il eu un cas où vous auriez pu utiliser l'IA mais ne l'avez pas fait ? Pourquoi ?", "type": "Ouverte" },
       { "q": "Avez-vous rencontré un frein ? Lequel ?", "type": "Ouverte", "kpi": "Météo du POC · REX" },
-      { "q": "Aujourd'hui, recommanderiez-vous de généraliser l'outil ?", "type": "Choix unique", "aide": "Oui / Plutôt oui / Plutôt non / Non — signal Go / No-Go pour le bilan." },
+      { "q": "Aujourd'hui, recommanderiez-vous de généraliser l'outil ?", "type": "Choix unique", "aide": "Oui / Plutôt oui / Plutôt non / Non : signal Go / No-Go pour le bilan." },
       { "q": "Impact sur votre charge mentale et votre plaisir au travail ?", "type": "Tendance (↗ / → / ↘)" }
     ]
   },
   "timeline": [
-    { "date": "2026-05-25", "label": "Pré-lancement", "type": "jalon", "statut": "fait", "responsable": "SIX", "desc": "Pré-lancement — préparation du setup et cadrage du dashboard." },
+    { "date": "2026-05-25", "label": "Pré-lancement", "type": "jalon", "statut": "fait", "responsable": "SIX", "desc": "Pré-lancement : préparation du setup et cadrage du dashboard." },
     { "date": "2026-06-01", "label": "Phase de setup (amont)", "type": "config", "statut": "fait", "responsable": "OPS / Sécurité", "desc": "Hors des 6 mois : proxy, accès, postes, sécurité, charte d'usage initiale." },
     { "date": "2026-06-15", "label": "Démarrage du POC · M0", "type": "demarrage", "statut": "fait", "responsable": "SIX", "desc": "Lancement officiel des 6 mois de POC." },
     { "date": "2026-08-15", "label": "REX 1 · M2", "type": "rex", "statut": "fait", "responsable": "PM", "desc": "Premier retour d'expérience (M0 → M2)." },
     { "date": "2026-10-15", "label": "REX 2 · M4", "type": "rex", "statut": "en-cours", "responsable": "PM", "desc": "Deuxième retour d'expérience (M2 → M4)." },
-    { "date": "2026-12-15", "label": "REX 3 · M6", "type": "rex", "statut": "a-venir", "responsable": "PM", "desc": "Troisième retour d'expérience (M4 → M6) — fin des 6 mois." },
+    { "date": "2026-12-15", "label": "REX 3 · M6", "type": "rex", "statut": "a-venir", "responsable": "PM", "desc": "Troisième retour d'expérience (M4 → M6), fin des 6 mois." },
     { "date": "2027-01-15", "label": "Bilan & décision", "type": "bilan", "statut": "a-venir", "responsable": "SIX + Direction", "desc": "Synthèse finale et décision de généralisation (après les 6 mois)." }
   ]
 }
